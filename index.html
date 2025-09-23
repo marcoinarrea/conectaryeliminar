@@ -3,40 +3,111 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Conectar y Eliminar</title>
+  
+  <!-- SEO Meta Tags -->
+  <title>Conectar y Eliminar - El Reality Show de La Revuelta | RTVE</title>
+  <meta name="description" content="Conectar y Eliminar: la masa madre de reality shows. El concurso más emocionante de La Revuelta en RTVE. Sigue las eliminaciones y descubre a los finalistas. Lo mejor de Telecinco ahora en formato digital.">
+  <meta name="keywords" content="Conectar y Eliminar, La Revuelta, RTVE, reality show, concurso, eliminaciones, finalistas, Telecinco, masa madre reality, televisión española">
+  <meta name="author" content="RTVE - La Revuelta">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="Spanish">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://conectaryeliminar.rtve.es/">
+  <meta property="og:title" content="Conectar y Eliminar - El Reality Show de La Revuelta | RTVE">
+  <meta property="og:description" content="La masa madre de reality shows. Sigue las eliminaciones del concurso más emocionante de La Revuelta. Lo mejor de la televisión española.">
+  <meta property="og:image" content="https://conectaryeliminar.rtve.es/img/og-image.jpg">
+  <meta property="og:site_name" content="Conectar y Eliminar - RTVE">
+  <meta property="og:locale" content="es_ES">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://conectaryeliminar.rtve.es/">
+  <meta property="twitter:title" content="Conectar y Eliminar - El Reality Show de La Revuelta | RTVE">
+  <meta property="twitter:description" content="La masa madre de reality shows. Sigue las eliminaciones del concurso más emocionante de La Revuelta.">
+  <meta property="twitter:image" content="https://conectaryeliminar.rtve.es/img/twitter-image.jpg">
+  <meta property="twitter:site" content="@rtve">
+  <meta property="twitter:creator" content="@larevuelta_tve">
+  
+  <!-- Additional Meta Tags -->
+  <meta name="theme-color" content="#1e40af">
+  <meta name="msapplication-TileColor" content="#1e40af">
+  <meta name="application-name" content="Conectar y Eliminar">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://conectaryeliminar.rtve.es/">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400&family=Oswald:wght@300;400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400&family=Oswald:wght@300;400;700&display=swap"></noscript>
+  
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400&family=Oswald:wght@300;400;700&display=swap" rel="stylesheet">
+  
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TVSeries",
+    "name": "Conectar y Eliminar",
+    "description": "La masa madre de reality shows. El concurso más emocionante de La Revuelta en RTVE.",
+    "genre": "Reality Show",
+    "broadcaster": {
+      "@type": "Organization",
+      "name": "RTVE",
+      "url": "https://www.rtve.es"
+    },
+    "creator": {
+      "@type": "Organization",
+      "name": "La Revuelta",
+      "url": "https://www.rtve.es/play/videos/la-revuelta/"
+    },
+    "inLanguage": "es",
+    "countryOfOrigin": "ES"
+  }
+  </script>
 </head>
 <body>
-  <div class="tv-frame">
-    <header class="main-header">
+  <div class="tv-frame" role="main">
+    <header class="main-header" role="banner">
       <div class="logo-container">
-        <h1 class="main-title">CONECTAR Y ELIMINAR</h1>
+        <h1 class="main-title" id="main-title">CONECTAR Y ELIMINAR</h1>
+        <p class="visually-hidden">El reality show de La Revuelta en RTVE - La masa madre de reality shows</p>
       </div>
-      <div class="decorative-lights">
-        <div class="light"></div>
-        <div class="light"></div>
-        <div class="light"></div>
-        <div class="light"></div>
+      <div class="decorative-lights" aria-hidden="true">
+        <div class="light" aria-label="Luz decorativa 1"></div>
+        <div class="light" aria-label="Luz decorativa 2"></div>
+        <div class="light" aria-label="Luz decorativa 3"></div>
+        <div class="light" aria-label="Luz decorativa 4"></div>
       </div>
     </header>
 
-    <main class="content">
-      <section class="expelled-section">
-        <h2 class="section-title expelled-title">
+    <main class="content" role="main" aria-labelledby="main-title">
+      <section class="expelled-section" aria-labelledby="expelled-title">
+        <h2 class="section-title expelled-title" id="expelled-title">
           <span class="title-text">PRIMER EXPULSADO</span>
         </h2>
-        <div class="contestants-grid" id="expelled-grid"></div>
+        <div class="contestants-grid" id="expelled-grid" role="region" aria-label="Participante expulsado del concurso"></div>
       </section>
 
-      <section class="finalists-section">
-        <h2 class="section-title finalists-title">
+      <section class="finalists-section" aria-labelledby="finalists-title">
+        <h2 class="section-title finalists-title" id="finalists-title">
           <span class="title-text">FINALISTAS</span>
         </h2>
-        <div class="contestants-grid" id="finalists-grid"></div>
+        <div class="contestants-grid" id="finalists-grid" role="region" aria-label="Participantes finalistas del concurso, incluyendo eliminados y activos"></div>
       </section>
     </main>
   </div>
+
+  <!-- Skip to content link for screen readers -->
+  <a href="#main-title" class="skip-link">Saltar al contenido principal</a>
 
   <script src="script.js"></script>
 </body>
