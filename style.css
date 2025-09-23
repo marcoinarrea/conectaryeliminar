@@ -1,0 +1,333 @@
+/* Reset y fuentes */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Oswald', sans-serif;
+  background: linear-gradient(45deg, #1e3a8a, #3b82f6, #1d4ed8, #2563eb);
+  background-size: 400% 400%;
+  animation: gradientShift 8s ease infinite;
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Marco de TV retro */
+.tv-frame {
+  max-width: 1400px;
+  margin: 20px auto;
+  background: linear-gradient(145deg, #1e3a8a, #1e40af);
+  border: 8px solid #374151;
+  border-radius: 25px;
+  box-shadow: 
+    0 0 30px rgba(59, 130, 246, 0.3),
+    inset 0 0 20px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.tv-frame::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.03) 2px,
+    rgba(255, 255, 255, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Header principal */
+.main-header {
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
+  padding: 30px;
+  text-align: center;
+  position: relative;
+  border-bottom: 5px solid #6b7280;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+.logo-container {
+  position: relative;
+  z-index: 2;
+}
+
+.main-title {
+  font-family: 'Bebas Neue', cursive;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 400;
+  color: #9ca3af;
+  text-shadow: 
+    3px 3px 0px #4b5563,
+    6px 6px 10px rgba(0, 0, 0, 0.8);
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  font-weight: 300;
+  color: #FFD700;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+  letter-spacing: 2px;
+}
+
+/* Luces decorativas */
+.decorative-lights {
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.light {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #60a5fa;
+  box-shadow: 0 0 15px #60a5fa;
+  animation: blink 2s infinite alternate;
+}
+
+.light:nth-child(2) { animation-delay: 0.5s; }
+.light:nth-child(3) { animation-delay: 1s; }
+.light:nth-child(4) { animation-delay: 1.5s; }
+
+@keyframes blink {
+  0% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+/* Contenido principal */
+.content {
+  padding: 40px 20px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Secciones */
+.expelled-section,
+.finalists-section {
+  margin-bottom: 60px;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
+  padding: 20px 0;
+}
+
+.title-text {
+  font-family: 'Bebas Neue', cursive;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  padding: 15px 30px;
+  border-radius: 15px;
+  position: relative;
+  display: inline-block;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+  letter-spacing: 2px;
+}
+
+.expelled-title .title-text {
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
+  border: 3px solid #6b7280;
+  box-shadow: 
+    0 0 20px rgba(59, 130, 246, 0.5),
+    inset 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.finalists-title .title-text {
+  background: linear-gradient(135deg, #1e40af, #60a5fa);
+  border: 3px solid #6b7280;
+  box-shadow: 
+    0 0 20px rgba(96, 165, 250, 0.5),
+    inset 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+/* Grid de concursantes */
+.contestants-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 25px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Grid especial para una sola tarjeta (primer expulsado) */
+.contestants-grid:has(.contestant-card:only-child) {
+  grid-template-columns: 200px;
+  justify-content: center;
+}
+
+/* Alternativa para navegadores que no soportan :has() */
+.contestants-grid.single-card {
+  grid-template-columns: 200px;
+  justify-content: center;
+}
+
+/* Tarjetas de concursantes */
+.contestant-card {
+  background: linear-gradient(145deg, #1e3a8a, #1e40af);
+  border: 3px solid #6b7280;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 5px 15px rgba(0, 0, 0, 0.5),
+    inset 0 0 10px rgba(107, 114, 128, 0.1);
+  overflow: hidden;
+}
+
+.contestant-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.7),
+    0 0 30px rgba(96, 165, 250, 0.3);
+}
+
+.contestant-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 48%, rgba(96, 165, 250, 0.1) 50%, transparent 52%);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.contestant-image {
+  width: 100%;
+  max-width: 150px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #444;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.contestant-name {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.5rem;
+  color: #d1d5db;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+/* Estados especiales */
+.contestant-card.expelled,
+.contestant-card.finalist-eliminated {
+  opacity: 0.7;
+  filter: grayscale(70%);
+}
+
+.contestant-card.expelled .contestant-image,
+.contestant-card.finalist-eliminated .contestant-image {
+  filter: grayscale(100%) brightness(0.6);
+}
+
+.contestant-card.expelled::after,
+.contestant-card.finalist-eliminated::after {
+  content: '❌';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4rem;
+  z-index: 3;
+  animation: pulse 2s infinite;
+}
+
+
+@keyframes pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.1); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tv-frame {
+    margin: 10px;
+    border-width: 4px;
+    border-radius: 15px;
+  }
+  
+  .main-header {
+    padding: 20px;
+  }
+  
+  .decorative-lights {
+    display: none;
+  }
+  
+  .content {
+    padding: 20px 15px;
+  }
+  
+  .contestants-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+  }
+  
+  .contestant-card {
+    padding: 15px;
+  }
+  
+  .contestant-image {
+    height: 140px;
+  }
+  
+  .expelled-section,
+  .finalists-section {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contestants-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .contestant-card {
+    padding: 10px;
+  }
+  
+  .contestant-image {
+    height: 120px;
+  }
+  
+  .contestant-name {
+    font-size: 1.2rem;
+  }
+}
