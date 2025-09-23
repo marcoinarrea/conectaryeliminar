@@ -36,6 +36,45 @@
   top: 6px;
 }
 
+/* GitHub Link */
+.github-link {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  width: 50px !important;
+  height: 50px !important;
+  background: #1e40af !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  transition: all 0.3s ease !important;
+  z-index: 99999 !important;
+  border: 3px solid #ffffff !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.github-link:hover {
+  background: rgba(59, 130, 246, 1) !important;
+  color: #ffffff !important;
+  transform: scale(1.1) !important;
+  box-shadow: 0 4px 20px rgba(30, 64, 175, 0.6) !important;
+}
+
+.github-link svg {
+  transition: transform 0.3s ease !important;
+  width: 24px !important;
+  height: 24px !important;
+}
+
+.github-link:hover svg {
+  transform: rotate(360deg);
+}
+
 body {
   font-family: 'Oswald', sans-serif;
   background: linear-gradient(45deg, #1e3a8a, #3b82f6, #1d4ed8, #2563eb);
@@ -360,5 +399,17 @@ body {
   
   .contestant-name {
     font-size: 1.2rem;
+  }
+  
+  .github-link {
+    bottom: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+  }
+  
+  .github-link svg {
+    width: 20px;
+    height: 20px;
   }
 }
