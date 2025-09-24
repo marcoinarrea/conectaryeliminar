@@ -364,8 +364,8 @@ async function desktopEliminationRoulette() {
   // Obtener las cards de participantes activos
   const participantCards = document.querySelectorAll('.participant-card:not(.eliminated)');
   
-  // Proceso de ruleta (más corto y directo)
-  const rounds = 12; // Menos rondas para más agilidad
+  // Proceso de ruleta (más rápido y directo)
+  const rounds = 8; // Menos rondas para mayor velocidad
   
   for (let i = 0; i < rounds; i++) {
     // Quitar highlight anterior
@@ -375,26 +375,26 @@ async function desktopEliminationRoulette() {
     const randomCard = participantCards[Math.floor(Math.random() * participantCards.length)];
     randomCard.classList.add('elimination-highlight');
     
-    // Delay progresivo (más ágil)
+    // Delay progresivo (más rápido)
     let delay;
-    if (i < rounds - 4) {
-      delay = 120; // Velocidad inicial
+    if (i < rounds - 3) {
+      delay = 80; // Velocidad inicial más rápida
     } else {
-      delay = 200 + (i - (rounds - 4)) * 150; // Desaceleración final
+      delay = 150 + (i - (rounds - 3)) * 100; // Desaceleración final más corta
     }
     
     await new Promise(resolve => setTimeout(resolve, delay));
   }
   
-  // Selección final - pausa dramática
-  await new Promise(resolve => setTimeout(resolve, 800));
+  // Selección final - pausa más corta
+  await new Promise(resolve => setTimeout(resolve, 400));
   
   // Eliminar el participante seleccionado
   const selectedCard = document.querySelector('.elimination-highlight');
   if (selectedCard) {
     // Scroll para centrar la card seleccionada
     selectedCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await new Promise(resolve => setTimeout(resolve, 300));
     
     // Extraer card y mostrar en modal
     await extractAndShowInModal(selectedCard);
@@ -456,24 +456,47 @@ async function mobileEliminationRoulette(activeParticipants) {
   
   console.log('🎰 Iniciando proceso de ruleta');
   
-  // Proceso de ruleta móvil más visible
-  const rounds = 20;
+  // Proceso de ruleta móvil optimizado
+  const rounds = 12; // Un par de rondas más para mayor dramatismo
   let selectedParticipant = null;
   
   for (let i = 0; i < rounds; i++) {
     // Seleccionar participante aleatorio
     const randomParticipant = activeParticipants[Math.floor(Math.random() * activeParticipants.length)];
     
-    // Actualizar imagen y nombre con efectos
-    participantImage.style.border = '3px solid #ff006e';
-    participantImage.style.boxShadow = '0 0 20px #ff006e';
-    participantImage.style.transform = 'scale(1.1)';
-    participantName.style.color = '#ff006e';
-    participantName.style.textShadow = '0 0 10px #ff006e';
+    // Transición suave de salida del participante anterior
+    participantImage.style.transition = 'all 0.2s ease-out';
+    participantName.style.transition = 'all 0.2s ease-out';
+    participantImage.style.opacity = '0.3';
+    participantName.style.opacity = '0.3';
     
+    await new Promise(resolve => setTimeout(resolve, 120));
+    
+    // Actualizar contenido
     participantImage.src = randomParticipant.image;
     participantImage.alt = randomParticipant.name;
     participantName.textContent = randomParticipant.name;
+    
+    // Aplicar animación de transición CSS
+    participantElement.classList.add('roulette-participant-transition');
+    
+    // Transición suave de entrada del nuevo participante
+    participantImage.style.transition = 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    participantName.style.transition = 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    
+    // Aplicar efectos visuales con transición
+    participantImage.style.opacity = '1';
+    participantImage.style.border = '3px solid #ff006e';
+    participantImage.style.boxShadow = '0 0 20px #ff006e';
+    participantImage.style.transform = 'scale(1.05)';
+    participantName.style.opacity = '1';
+    participantName.style.color = '#ff006e';
+    participantName.style.textShadow = '0 0 10px #ff006e';
+    
+    // Remover la clase de animación después de completarla
+    setTimeout(() => {
+      participantElement.classList.remove('roulette-participant-transition');
+    }, 400);
     
     // Guardar el último participante para eliminación
     if (i === rounds - 1) {
@@ -481,24 +504,28 @@ async function mobileEliminationRoulette(activeParticipants) {
       console.log('🎯 Participante seleccionado:', selectedParticipant.name);
     }
     
-    // Delay progresivo más dramático
+    // Delay progresivo más moderado para móvil
     let delay;
-    if (i < rounds - 6) {
-      delay = 120; // Velocidad inicial
+    if (i < rounds - 4) {
+      delay = 180; // Velocidad inicial un poco más pausada
     } else {
-      delay = 200 + (i - (rounds - 6)) * 300; // Desaceleración dramática
+      delay = 280 + (i - (rounds - 4)) * 180; // Desaceleración gradual
     }
     
     await new Promise(resolve => setTimeout(resolve, delay));
     
-    // Reset visual
-    participantImage.style.border = '3px solid transparent';
-    participantImage.style.boxShadow = 'none';
-    participantImage.style.transform = 'scale(1)';
-    participantName.style.color = '#ffffff';
-    participantName.style.textShadow = 'none';
-    
-    await new Promise(resolve => setTimeout(resolve, 50));
+    // Reset suave solo si no es la última ronda
+    if (i < rounds - 1) {
+      participantImage.style.transition = 'all 0.2s ease-in';
+      participantName.style.transition = 'all 0.2s ease-in';
+      participantImage.style.border = '3px solid transparent';
+      participantImage.style.boxShadow = 'none';
+      participantImage.style.transform = 'scale(1)';
+      participantName.style.color = '#ffffff';
+      participantName.style.textShadow = 'none';
+      
+      await new Promise(resolve => setTimeout(resolve, 70));
+    }
   }
   
   // Activar estado final
@@ -508,20 +535,20 @@ async function mobileEliminationRoulette(activeParticipants) {
   participantName.style.color = '#ff006e';
   participantName.style.textShadow = '0 0 15px #ff006e';
   
-  // Pausa dramática final
+  // Pausa dramática final más corta
   titleElement.textContent = '🎯 ¡SELECCIONADO!';
   titleElement.style.color = '#ff006e';
   statusElement.textContent = '💥 Preparando eliminación...';
   statusElement.style.color = '#ff006e';
   
-  await new Promise(resolve => setTimeout(resolve, 2000));
+  await new Promise(resolve => setTimeout(resolve, 1500));
   
   console.log('🎰 Cerrando ruleta y mostrando modal');
   
   // Animación de salida de la ruleta
   rouletteModal.style.transform = 'translate(-50%, -50%) scale(0) rotate(720deg)';
   rouletteModal.style.opacity = '0';
-  await new Promise(resolve => setTimeout(resolve, 800));
+  await new Promise(resolve => setTimeout(resolve, 900));
   rouletteModal.remove();
   
   // Mostrar directamente el modal de eliminación
@@ -532,7 +559,7 @@ async function mobileEliminationRoulette(activeParticipants) {
       selectedParticipant.favoritePhrase || selectedParticipant.lastWords || '"Sin palabras..."'
     );
     
-    // Marcar como eliminado en la interfaz
+    // Marcar como eliminado en la interfaz DESPUÉS del modal
     markParticipantAsEliminated(selectedParticipant.name);
   }
 }
@@ -561,22 +588,38 @@ function markParticipantAsEliminated(participantName) {
 }
 
 async function extractAndShowInModal(card) {
-  // Obtener información del participante antes de remover la card
+  // ETAPA 1: Obtener información del participante
   const participantName = card.querySelector('.participant-name').textContent;
   const participantImage = card.querySelector('.participant-image').src;
   const participantQuote = card.querySelector('.participant-quote').textContent;
   
-  // Crear efecto de "extracción" de la card
-  card.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-  card.style.transform = 'scale(0.8) translateY(-50px)';
-  card.style.opacity = '0.7';
+  console.log('🎬 ETAPA 1: Información del participante obtenida');
   
-  await new Promise(resolve => setTimeout(resolve, 800));
+  // ETAPA 2: Efecto de "extracción" visual más rápido
+  card.style.transition = 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+  card.style.transform = 'scale(0.9) translateY(-20px)';
+  card.style.opacity = '0.8';
   
-  // Marcar como eliminado en lugar de remover
-  card.classList.add('eliminated');
+  await new Promise(resolve => setTimeout(resolve, 500));
+  
+  console.log('🎬 ETAPA 2: Efecto de extracción completado');
+  
+  // ETAPA 3: Desmarcar del fondo y preparar para modal
+  card.classList.remove('elimination-highlight');
   card.style.transform = '';
   card.style.opacity = '';
+  card.style.transition = '';
+  
+  console.log('🎬 ETAPA 3: Card desmarcada del fondo');
+  
+  // ETAPA 4: Crear modal de eliminación y esperar a que termine completamente
+  console.log('🎬 ETAPA 4: Iniciando modal de eliminación');
+  await createEliminationModal(participantName, participantImage, participantQuote);
+  
+  console.log('🎬 ETAPA 5: Modal completado, aplicando cambios finales');
+  
+  // ETAPA 5: AHORA aplicar los cambios visuales después de cerrar el modal
+  card.classList.add('eliminated');
   
   // Actualizar el estado visual
   const statusElement = card.querySelector('.participant-status');
@@ -590,8 +633,7 @@ async function extractAndShowInModal(card) {
     quoteElement.textContent = '"¡Me han eliminado en el simulador!"';
   }
   
-  // Crear modal de eliminación
-  await createEliminationModal(participantName, participantImage, participantQuote);
+  console.log('🎬 ETAPA 6: Proceso de eliminación completado');
 }
 
 async function createEliminationModal(name, image, quote) {
@@ -661,8 +703,8 @@ async function createEliminationModal(name, image, quote) {
   gameState.eliminations++;
   document.getElementById('eliminations-count').textContent = gameState.eliminations;
   
-  // Mostrar notificación mejorada
-  showEnhancedEliminationNotification(name);
+  // Mostrar notificación mejorada y esperar a que termine
+  await showEnhancedEliminationNotification(name);
 }
 
 async function startEliminationCountdown() {
@@ -673,17 +715,17 @@ async function startEliminationCountdown() {
     countdownNumber.style.transform = 'scale(1.5)';
     countdownNumber.style.color = i === 1 ? 'var(--color-primary)' : 'var(--color-text)';
     
-    await new Promise(resolve => setTimeout(resolve, 200));
+    await new Promise(resolve => setTimeout(resolve, 150));
     countdownNumber.style.transform = 'scale(1)';
-    await new Promise(resolve => setTimeout(resolve, 800));
+    await new Promise(resolve => setTimeout(resolve, 500)); // Más rápido
   }
   
-  // Último momento dramático
+  // Último momento dramático más corto
   countdownNumber.textContent = '¡ELIMINADO!';
   countdownNumber.style.color = 'var(--color-primary)';
   countdownNumber.style.transform = 'scale(2)';
   
-  await new Promise(resolve => setTimeout(resolve, 500));
+  await new Promise(resolve => setTimeout(resolve, 300));
 }
 
 async function explodeModalCard(modalCard) {
@@ -742,54 +784,59 @@ async function explodeModalCard(modalCard) {
 }
 
 
-function showEnhancedEliminationNotification(participantName) {
-  const notification = document.createElement('div');
-  notification.className = 'enhanced-elimination-notification';
-  notification.innerHTML = `
-    <div class="notification-content">
-      <div class="notification-icon">💥</div>
-      <div class="notification-title">¡Pa casa ${participantName.toUpperCase()}!</div>
-      <div class="notification-subtitle">Jorge Ponce aprueba esta eliminación</div>
-      <div class="notification-tagline">Reality sin filtros ✨</div>
-      <div class="notification-stats">
-        <div class="stat-item">
-          <span class="stat-number">${gameState.connections}</span>
-          <span class="stat-label">Conexiones</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-number">${gameState.eliminations}</span>
-          <span class="stat-label">Eliminaciones</span>
+async function showEnhancedEliminationNotification(participantName) {
+  return new Promise((resolve) => {
+    const notification = document.createElement('div');
+    notification.className = 'enhanced-elimination-notification';
+    notification.innerHTML = `
+      <div class="notification-content">
+        <div class="notification-icon">💥</div>
+        <div class="notification-title">¡Pa casa ${participantName.toUpperCase()}!</div>
+        <div class="notification-subtitle">Jorge Ponce aprueba esta eliminación</div>
+        <div class="notification-tagline">Reality sin filtros ✨</div>
+        <div class="notification-stats">
+          <div class="stat-item">
+            <span class="stat-number">${gameState.connections}</span>
+            <span class="stat-label">Conexiones</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">${gameState.eliminations}</span>
+            <span class="stat-label">Eliminaciones</span>
+          </div>
         </div>
       </div>
-    </div>
-  `;
-  
-  notification.style.cssText = `
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    background: linear-gradient(145deg, rgba(22, 27, 34, 0.95), rgba(30, 41, 59, 0.95));
-    color: #ffffff;
-    padding: 4rem 3rem;
-    border-radius: 25px;
-    z-index: 5000;
-    text-align: center;
-    box-shadow: var(--shadow-neon), 0 0 100px rgba(255, 0, 110, 0.5);
-    border: 2px solid var(--color-primary);
-    animation: enhancedNotificationShow 3s ease forwards;
-    max-width: 90vw;
-    width: 400px;
-    backdrop-filter: blur(10px);
-  `;
-  
-  document.body.appendChild(notification);
-  
-  // Remover después de 4 segundos
-  setTimeout(() => {
-    notification.style.animation = 'enhancedNotificationHide 0.8s ease forwards';
-    setTimeout(() => notification.remove(), 800);
-  }, 7000);
+    `;
+    
+    notification.style.cssText = `
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: linear-gradient(145deg, rgba(22, 27, 34, 0.95), rgba(30, 41, 59, 0.95));
+      color: #ffffff;
+      padding: 4rem 3rem;
+      border-radius: 25px;
+      z-index: 5000;
+      text-align: center;
+      box-shadow: var(--shadow-neon), 0 0 100px rgba(255, 0, 110, 0.5);
+      border: 2px solid var(--color-primary);
+      animation: enhancedNotificationShow 3s ease forwards;
+      max-width: 90vw;
+      width: 400px;
+      backdrop-filter: blur(10px);
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Remover después de 4 segundos y resolver la promesa (más rápido)
+    setTimeout(() => {
+      notification.style.animation = 'enhancedNotificationHide 0.6s ease forwards';
+      setTimeout(() => {
+        notification.remove();
+        resolve(); // Resolver la promesa cuando la notificación desaparezca completamente
+      }, 600);
+    }, 4000);
+  });
 }
 
 function removeDarkOverlay() {
