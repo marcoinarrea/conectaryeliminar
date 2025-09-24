@@ -573,20 +573,24 @@ body {
 
 .philosophy-quote::before,
 .philosophy-quote::after {
-  content: '"';
-  font-size: 1.5em;
+  content: '';
+  font-size: 3rem;
   color: var(--color-accent);
   position: absolute;
+  opacity: 0.3;
+  font-family: Georgia, serif;
 }
 
 .philosophy-quote::before {
-  top: -0.5rem;
-  left: -1rem;
+  content: '"';
+  top: -1rem;
+  left: -2rem;
 }
 
 .philosophy-quote::after {
-  bottom: -1rem;
-  right: -1rem;
+  content: '"';
+  bottom: -1.5rem;
+  right: -2rem;
 }
 
 .philosophy-author {

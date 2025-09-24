@@ -47,13 +47,19 @@ function initNavigation() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const sectionId = entry.target.id || 'essence';
+        console.log('Sección visible:', sectionId); // Debug
         updateActiveNavItem(sectionId);
       }
     });
-  }, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });
+  }, { threshold: 0.2, rootMargin: '-80px 0px -30% 0px' });
   
-  document.querySelectorAll('.section, .hero-section').forEach(section => {
-    observer.observe(section);
+  // Observar todas las secciones con ID
+  const sectionsToObserve = ['#essence', '#participants', '#galas', '#moments', '#simulator'];
+  sectionsToObserve.forEach(sectionSelector => {
+    const section = document.querySelector(sectionSelector);
+    if (section) {
+      observer.observe(section);
+    }
   });
 }
 
