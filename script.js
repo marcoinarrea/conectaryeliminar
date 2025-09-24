@@ -137,7 +137,7 @@ function createParticipantCard(participant, isEliminated) {
     ? `Eliminade - ${participant.eliminationDate}`
     : participant.signature || 'Superviviente';
   
-  card.innerHTML = `
+        card.innerHTML = `
     <div class="participant-image-container">
       <img src="${participant.image}" alt="${participant.name}" class="participant-image" loading="lazy">
     </div>
@@ -528,8 +528,8 @@ function showEnhancedEliminationNotification(participantName) {
   notification.innerHTML = `
     <div class="notification-content">
       <div class="notification-icon">💥</div>
-      <div class="notification-title">¡${participantName.toUpperCase()} ELIMINADO!</div>
-      <div class="notification-subtitle">Jorge Ponce ha hablado</div>
+      <div class="notification-title">¡Pa casa ${participantName.toUpperCase()}!</div>
+      <div class="notification-subtitle">Jorge Ponce aprueba esta eliminación</div>
       <div class="notification-tagline">Reality sin filtros ✨</div>
       <div class="notification-stats">
         <div class="stat-item">
@@ -549,17 +549,18 @@ function showEnhancedEliminationNotification(participantName) {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
-    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
-    color: var(--color-text);
+    background: linear-gradient(145deg, rgba(22, 27, 34, 0.95), rgba(30, 41, 59, 0.95));
+    color: #ffffff;
     padding: 4rem 3rem;
     border-radius: 25px;
     z-index: 5000;
     text-align: center;
     box-shadow: var(--shadow-neon), 0 0 100px rgba(255, 0, 110, 0.5);
-    border: 2px solid var(--color-accent);
+    border: 2px solid var(--color-primary);
     animation: enhancedNotificationShow 3s ease forwards;
     max-width: 90vw;
     width: 400px;
+    backdrop-filter: blur(10px);
   `;
   
   document.body.appendChild(notification);
@@ -568,7 +569,7 @@ function showEnhancedEliminationNotification(participantName) {
   setTimeout(() => {
     notification.style.animation = 'enhancedNotificationHide 0.8s ease forwards';
     setTimeout(() => notification.remove(), 800);
-  }, 4000);
+  }, 7000);
 }
 
 function removeDarkOverlay() {
