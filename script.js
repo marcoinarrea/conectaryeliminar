@@ -533,12 +533,12 @@ function showEnhancedEliminationNotification(participantName) {
       <div class="notification-tagline">Reality sin filtros ✨</div>
       <div class="notification-stats">
         <div class="stat-item">
-          <span class="stat-number">${gameState.eliminations}</span>
-          <span class="stat-label">Eliminaciones</span>
-        </div>
-        <div class="stat-item">
           <span class="stat-number">${gameState.connections}</span>
           <span class="stat-label">Conexiones</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">${gameState.eliminations}</span>
+          <span class="stat-label">Eliminaciones</span>
         </div>
       </div>
     </div>
