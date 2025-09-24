@@ -34,13 +34,40 @@ async function loadAppData() {
 // NAVEGACIÓN
 function initNavigation() {
   const navItems = document.querySelectorAll('.nav-item');
+  const navToggle = document.getElementById('nav-toggle');
+  const navMenu = document.getElementById('nav-menu');
+  
+  // Funcionalidad de items de navegación
   navItems.forEach(item => {
     item.addEventListener('click', (e) => {
       e.preventDefault();
       const targetSection = item.getAttribute('data-section');
       scrollToSection(targetSection);
+      
+      // Cerrar menú móvil después de hacer click
+      if (navMenu && navToggle) {
+        navMenu.classList.remove('active');
+        navToggle.classList.remove('active');
+      }
     });
   });
+  
+  // Funcionalidad del menú hamburguesa
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+    
+    // Cerrar menú al hacer click fuera
+    document.addEventListener('click', (e) => {
+      if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+        navMenu.classList.remove('active');
+        navToggle.classList.remove('active');
+      }
+    });
+  }
   
   // Intersection Observer para navegación automática
   const observer = new IntersectionObserver((entries) => {
