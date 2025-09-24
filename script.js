@@ -220,20 +220,27 @@ function initSimulator() {
   if (!simulator) return;
   
   simulator.innerHTML = `
-    <div class="game-interface">
-      <div class="game-header">
-        <h3>Simulador Jorge Ponce</h3>
-        <div class="game-stats">
-          <div class="stat">Conexiones: <span id="connections-count">0</span></div>
-          <div class="stat">Eliminaciones: <span id="eliminations-count">0</span></div>
-        </div>
+    <div class="simulator-stats">
+      <div class="simulator-stat">
+        <span class="stat-number" id="connections-count">0</span>
+        <span class="stat-label">Conexiones</span>
       </div>
-      <div class="game-area">
-        <button class="connect-btn" id="connect-btn" onclick="startEliminationProcess()">
-          CONECTAR Y ELIMINAR
-        </button>
-        <div class="connection-status" id="connection-status">Listo para conectar al salón virtual</div>
+      <div class="simulator-stat">
+        <span class="stat-number" id="eliminations-count">0</span>
+        <span class="stat-label">Eliminaciones</span>
       </div>
+    </div>
+    
+    <div class="simulator-controls">
+      <button class="simulator-btn" id="connect-btn" onclick="startEliminationProcess()">
+        <span class="btn-icon">⚡</span>
+        <span class="btn-text">CONECTAR Y ELIMINAR</span>
+      </button>
+    </div>
+    
+    <div class="simulator-status" id="connection-status">
+      <span class="status-indicator"></span>
+      Listo para conectar al salón virtual
     </div>
   `;
 }
@@ -246,10 +253,13 @@ async function startEliminationProcess() {
   // Deshabilitar botón
   const connectBtn = document.getElementById('connect-btn');
   connectBtn.disabled = true;
-  connectBtn.textContent = 'CONECTANDO...';
+  connectBtn.querySelector('.btn-text').textContent = 'CONECTANDO...';
   
   // Actualizar status
-  document.getElementById('connection-status').textContent = 'Conectando al salón virtual...';
+  document.getElementById('connection-status').innerHTML = `
+    <span class="status-indicator"></span>
+    Conectando al salón virtual...
+  `;
   
   // Navegar a participantes
   scrollToSection('participants');
@@ -265,8 +275,11 @@ async function startEliminationProcess() {
   
   // Restaurar botón
   connectBtn.disabled = false;
-  connectBtn.textContent = 'CONECTAR Y ELIMINAR';
-  document.getElementById('connection-status').textContent = 'Listo para otra conexión';
+  connectBtn.querySelector('.btn-text').textContent = 'CONECTAR Y ELIMINAR';
+  document.getElementById('connection-status').innerHTML = `
+    <span class="status-indicator"></span>
+    Listo para otra conexión
+  `;
 }
 
 function createDarkOverlay() {
