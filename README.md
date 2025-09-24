@@ -66,17 +66,28 @@ Puedes ver la aplicación funcionando en: [https://conectaryeliminar.com](https:
 - **Modal de compartir** con múltiples plataformas
 - **Meta tags** dinámicos y robots.txt
 
-## 🤝 Contribuciones
+## 🤝 Contribuciones y Forks
 
+### 🔄 **Contribuciones directas**
 **¡Se aceptan Pull Requests!** 🎉
 
-Este es un proyecto de la comunidad para la comunidad. Si quieres contribuir:
+Si quieres contribuir al proyecto original:
 
 1. **Fork** el repositorio
 2. Crea una **rama** para tu feature (`git checkout -b feature/nueva-funcionalidad`)
 3. **Commit** tus cambios (`git commit -m 'Añadir nueva funcionalidad'`)
 4. **Push** a la rama (`git push origin feature/nueva-funcionalidad`)
 5. Abre un **Pull Request**
+
+### 🍴 **Crear tu propia versión**
+¿Quieres crear tu propio simulador de reality? ¡Perfecto!
+
+- ✅ **Haz fork** libremente
+- ✅ **Adapta** para otros programas de TV
+- ✅ **Crea** versiones temáticas
+- ✅ **Monetiza** si quieres (respetando la atribución)
+
+**Solo recuerda**: Incluir la atribución según la licencia CC BY 4.0
 
 ## 📁 Estructura del proyecto
 
@@ -114,7 +125,32 @@ Este proyecto captura la esencia de los grandes realities españoles con el humo
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia MIT - mira el archivo [LICENSE](LICENSE) para más detalles.
+Este proyecto está bajo la **Creative Commons Attribution 4.0 International License (CC BY 4.0)**.
+
+### ✅ **Puedes:**
+- ✅ **Hacer fork** del proyecto
+- ✅ **Crear proyectos derivados** (incluso comerciales)
+- ✅ **Modificar y adaptar** el código
+- ✅ **Redistribuir** en cualquier formato
+
+### 📝 **Requisitos de atribución:**
+Si usas este proyecto o creas algo basado en él, **DEBES**:
+
+1. **Dar crédito claro**: "Basado en 'Conectar y Eliminar' por Marco Iñarrea"
+2. **Enlazar al repositorio original**: [https://github.com/marcoinarrea/conectaryeliminar](https://github.com/marcoinarrea/conectaryeliminar)
+3. **Incluir la atribución en**:
+   - README de tu proyecto
+   - Footer o sección "Acerca de" de tu aplicación
+   - Descripción del repositorio
+
+### 📋 **Ejemplo de atribución:**
+```
+Este proyecto está basado en 'Conectar y Eliminar' por Marco Iñarrea 
+(https://github.com/marcoinarrea/conectaryeliminar), 
+inspirado en el reality show de Jorge Ponce en La Revuelta (RTVE).
+```
+
+Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
 ## 🎮 Cómo usar el simulador
 
