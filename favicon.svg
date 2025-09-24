@@ -1,21 +1,45 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <defs>
+    <!-- Fondo con gradiente principal de la web -->
     <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#ff006e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#8338ec;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3a86ff;stop-opacity:1" />
     </linearGradient>
+    
+    <!-- Gradiente para el texto -->
     <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#fbbf24;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e2e8f0;stop-opacity:1" />
     </linearGradient>
+    
+    <!-- Gradiente para el glow -->
+    <radialGradient id="glowGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ff006e;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#ff006e;stop-opacity:0" />
+    </radialGradient>
+    
+    <!-- Filtro para el glow -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
   
-  <!-- Background circle -->
-  <circle cx="16" cy="16" r="15" fill="url(#bgGradient)" stroke="#6b7280" stroke-width="2"/>
+  <!-- Glow exterior -->
+  <circle cx="16" cy="16" r="14" fill="url(#glowGradient)"/>
   
-  <!-- Text CE -->
-  <text x="16" y="22" font-family="Arial, sans-serif" font-size="14" font-weight="bold" 
-        text-anchor="middle" fill="url(#textGradient)" 
-        style="text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">CE</text>
+  <!-- Fondo principal -->
+  <circle cx="16" cy="16" r="13" fill="url(#bgGradient)" stroke="rgba(255, 255, 255, 0.2)" stroke-width="1"/>
+  
+  <!-- Highlight superior -->
+  <ellipse cx="16" cy="10" rx="8" ry="3" fill="rgba(255, 255, 255, 0.15)"/>
+  
+  <!-- Texto CE con glow -->
+  <text x="16" y="22" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" 
+        text-anchor="middle" fill="url(#textGradient)" filter="url(#glow)"
+        style="text-shadow: 0 0 4px rgba(255, 0, 110, 0.8);">CE</text>
 </svg>
