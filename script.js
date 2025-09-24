@@ -246,6 +246,8 @@ function initSimulator() {
 }
 
 async function startEliminationProcess() {
+  console.log('🚀 Iniciando proceso de eliminación');
+  
   // Incrementar estadísticas
   gameState.connections++;
   document.getElementById('connections-count').textContent = gameState.connections;
@@ -261,11 +263,15 @@ async function startEliminationProcess() {
     Conectando al salón virtual...
   `;
   
-  // Navegar a participantes
-  scrollToSection('participants');
+  // Detectar móvil antes de navegar
+  const isMobile = window.innerWidth <= 768;
   
-  // Esperar a que termine el scroll
-  await new Promise(resolve => setTimeout(resolve, 1000));
+  if (!isMobile) {
+    // Solo navegar a participantes en desktop
+    scrollToSection('participants');
+    // Esperar a que termine el scroll
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
   
   // Crear overlay oscuro
   createDarkOverlay();
@@ -311,6 +317,23 @@ async function eliminationRoulette() {
     return;
   }
   
+  // Detectar si es móvil/tablet
+  const isMobile = window.innerWidth <= 768;
+  console.log('📱 Detección de dispositivo - Ancho:', window.innerWidth, 'Es móvil:', isMobile);
+  
+  if (isMobile) {
+    console.log('📱 Ejecutando experiencia móvil');
+    await mobileEliminationRoulette(activeParticipants);
+  } else {
+    console.log('🖥️ Ejecutando experiencia desktop');
+    await desktopEliminationRoulette();
+  }
+  
+  // Remover overlay
+  removeDarkOverlay();
+}
+
+async function desktopEliminationRoulette() {
   // Obtener las cards de participantes activos
   const participantCards = document.querySelectorAll('.participant-card:not(.eliminated)');
   
@@ -349,9 +372,165 @@ async function eliminationRoulette() {
     // Extraer card y mostrar en modal
     await extractAndShowInModal(selectedCard);
   }
+}
+
+async function mobileEliminationRoulette(activeParticipants) {
+  console.log('🎰 Iniciando ruleta móvil con', activeParticipants.length, 'participantes');
   
-  // Remover overlay
-  removeDarkOverlay();
+  // Crear ruleta móvil
+  const rouletteModal = document.createElement('div');
+  rouletteModal.className = 'mobile-elimination-roulette';
+  rouletteModal.style.cssText = `
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 5000;
+    background: linear-gradient(145deg, rgba(22, 27, 34, 0.98), rgba(30, 41, 59, 0.98));
+    border-radius: 25px;
+    padding: 2.5rem;
+    box-shadow: 0 0 50px rgba(255, 0, 110, 0.8), 0 0 100px rgba(58, 134, 255, 0.4);
+    border: 3px solid #ff006e;
+    backdrop-filter: blur(15px);
+    text-align: center;
+    min-width: 320px;
+    max-width: 90vw;
+    opacity: 0;
+  `;
+  
+  rouletteModal.innerHTML = `
+    <div class="roulette-title" style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: #ffffff; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em;">
+      🎯 SELECCIONANDO PARTICIPANTE
+    </div>
+    <div class="roulette-participant" id="current-participant" style="margin-bottom: 1rem;">
+      <img src="${activeParticipants[0].image}" alt="${activeParticipants[0].name}" class="roulette-participant-image" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid transparent; margin-bottom: 1rem; transition: all 0.3s ease;">
+      <div class="roulette-participant-name" style="font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem;">${activeParticipants[0].name}</div>
+    </div>
+    <div class="roulette-status" style="font-size: 1rem; color: #94a3b8; opacity: 0.8;">
+      ⚡ Reality sin filtros ✨
+    </div>
+  `;
+  
+  document.body.appendChild(rouletteModal);
+  
+  const participantElement = document.getElementById('current-participant');
+  const participantImage = participantElement.querySelector('.roulette-participant-image');
+  const participantName = participantElement.querySelector('.roulette-participant-name');
+  const titleElement = rouletteModal.querySelector('.roulette-title');
+  const statusElement = rouletteModal.querySelector('.roulette-status');
+  
+  // Animación de entrada más dramática
+  await new Promise(resolve => setTimeout(resolve, 100));
+  rouletteModal.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+  rouletteModal.style.opacity = '1';
+  rouletteModal.style.transform = 'translate(-50%, -50%) scale(1)';
+  
+  await new Promise(resolve => setTimeout(resolve, 800));
+  
+  console.log('🎰 Iniciando proceso de ruleta');
+  
+  // Proceso de ruleta móvil más visible
+  const rounds = 20;
+  let selectedParticipant = null;
+  
+  for (let i = 0; i < rounds; i++) {
+    // Seleccionar participante aleatorio
+    const randomParticipant = activeParticipants[Math.floor(Math.random() * activeParticipants.length)];
+    
+    // Actualizar imagen y nombre con efectos
+    participantImage.style.border = '3px solid #ff006e';
+    participantImage.style.boxShadow = '0 0 20px #ff006e';
+    participantImage.style.transform = 'scale(1.1)';
+    participantName.style.color = '#ff006e';
+    participantName.style.textShadow = '0 0 10px #ff006e';
+    
+    participantImage.src = randomParticipant.image;
+    participantImage.alt = randomParticipant.name;
+    participantName.textContent = randomParticipant.name;
+    
+    // Guardar el último participante para eliminación
+    if (i === rounds - 1) {
+      selectedParticipant = randomParticipant;
+      console.log('🎯 Participante seleccionado:', selectedParticipant.name);
+    }
+    
+    // Delay progresivo más dramático
+    let delay;
+    if (i < rounds - 6) {
+      delay = 120; // Velocidad inicial
+    } else {
+      delay = 200 + (i - (rounds - 6)) * 300; // Desaceleración dramática
+    }
+    
+    await new Promise(resolve => setTimeout(resolve, delay));
+    
+    // Reset visual
+    participantImage.style.border = '3px solid transparent';
+    participantImage.style.boxShadow = 'none';
+    participantImage.style.transform = 'scale(1)';
+    participantName.style.color = '#ffffff';
+    participantName.style.textShadow = 'none';
+    
+    await new Promise(resolve => setTimeout(resolve, 50));
+  }
+  
+  // Activar estado final
+  participantImage.style.border = '3px solid #ff006e';
+  participantImage.style.boxShadow = '0 0 30px #ff006e, 0 0 50px rgba(255, 0, 110, 0.5)';
+  participantImage.style.transform = 'scale(1.2)';
+  participantName.style.color = '#ff006e';
+  participantName.style.textShadow = '0 0 15px #ff006e';
+  
+  // Pausa dramática final
+  titleElement.textContent = '🎯 ¡SELECCIONADO!';
+  titleElement.style.color = '#ff006e';
+  statusElement.textContent = '💥 Preparando eliminación...';
+  statusElement.style.color = '#ff006e';
+  
+  await new Promise(resolve => setTimeout(resolve, 2000));
+  
+  console.log('🎰 Cerrando ruleta y mostrando modal');
+  
+  // Animación de salida de la ruleta
+  rouletteModal.style.transform = 'translate(-50%, -50%) scale(0) rotate(720deg)';
+  rouletteModal.style.opacity = '0';
+  await new Promise(resolve => setTimeout(resolve, 800));
+  rouletteModal.remove();
+  
+  // Mostrar directamente el modal de eliminación
+  if (selectedParticipant) {
+    await createEliminationModal(
+      selectedParticipant.name, 
+      selectedParticipant.image, 
+      selectedParticipant.favoritePhrase || selectedParticipant.lastWords || '"Sin palabras..."'
+    );
+    
+    // Marcar como eliminado en la interfaz
+    markParticipantAsEliminated(selectedParticipant.name);
+  }
+}
+
+function markParticipantAsEliminated(participantName) {
+  // Buscar la card del participante y marcarla como eliminada
+  const participantCards = document.querySelectorAll('.participant-card');
+  participantCards.forEach(card => {
+    const nameElement = card.querySelector('.participant-name');
+    if (nameElement && nameElement.textContent === participantName) {
+      card.classList.add('eliminated');
+      
+      // Actualizar el estado visual
+      const statusElement = card.querySelector('.participant-status');
+      if (statusElement) {
+        statusElement.textContent = `Eliminade - ${new Date().toLocaleDateString('es-ES')}`;
+      }
+      
+      // Actualizar la quote
+      const quoteElement = card.querySelector('.participant-quote');
+      if (quoteElement) {
+        quoteElement.textContent = '"¡Me han eliminado en el simulador!"';
+      }
+    }
+  });
 }
 
 async function extractAndShowInModal(card) {
@@ -367,8 +546,22 @@ async function extractAndShowInModal(card) {
   
   await new Promise(resolve => setTimeout(resolve, 800));
   
-  // Remover la card original de la lista
-  card.remove();
+  // Marcar como eliminado en lugar de remover
+  card.classList.add('eliminated');
+  card.style.transform = '';
+  card.style.opacity = '';
+  
+  // Actualizar el estado visual
+  const statusElement = card.querySelector('.participant-status');
+  if (statusElement) {
+    statusElement.textContent = `Eliminade - ${new Date().toLocaleDateString('es-ES')}`;
+  }
+  
+  // Actualizar la quote
+  const quoteElement = card.querySelector('.participant-quote');
+  if (quoteElement) {
+    quoteElement.textContent = '"¡Me han eliminado en el simulador!"';
+  }
   
   // Crear modal de eliminación
   await createEliminationModal(participantName, participantImage, participantQuote);
