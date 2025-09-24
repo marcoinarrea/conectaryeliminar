@@ -301,9 +301,8 @@ async function eliminationRoulette() {
   // Obtener las cards de participantes activos
   const participantCards = document.querySelectorAll('.participant-card:not(.eliminated)');
   
-  // Proceso de ruleta
-  const rounds = 15; // Número de vueltas
-  const finalDelay = 200; // Delay final más lento
+  // Proceso de ruleta (más corto y directo)
+  const rounds = 12; // Menos rondas para más agilidad
   
   for (let i = 0; i < rounds; i++) {
     // Quitar highlight anterior
@@ -313,57 +312,222 @@ async function eliminationRoulette() {
     const randomCard = participantCards[Math.floor(Math.random() * participantCards.length)];
     randomCard.classList.add('elimination-highlight');
     
-    // Delay progresivo (más lento hacia el final)
-    const delay = i < rounds - 5 ? 100 : 150 + (i - (rounds - 5)) * 50;
+    // Delay progresivo (más ágil)
+    let delay;
+    if (i < rounds - 4) {
+      delay = 120; // Velocidad inicial
+    } else {
+      delay = 200 + (i - (rounds - 4)) * 150; // Desaceleración final
+    }
+    
     await new Promise(resolve => setTimeout(resolve, delay));
   }
   
-  // Selección final
-  await new Promise(resolve => setTimeout(resolve, 500));
+  // Selección final - pausa dramática
+  await new Promise(resolve => setTimeout(resolve, 800));
   
   // Eliminar el participante seleccionado
   const selectedCard = document.querySelector('.elimination-highlight');
   if (selectedCard) {
-    await eliminateParticipant(selectedCard);
+    // Scroll para centrar la card seleccionada
+    selectedCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
+    // Extraer card y mostrar en modal
+    await extractAndShowInModal(selectedCard);
   }
   
   // Remover overlay
   removeDarkOverlay();
 }
 
-async function eliminateParticipant(card) {
-  // Efecto dramático
-  card.style.transition = 'all 1s ease';
-  card.style.transform = 'scale(1.1)';
-  card.style.boxShadow = '0 0 50px var(--color-primary)';
+async function extractAndShowInModal(card) {
+  // Obtener información del participante antes de remover la card
+  const participantName = card.querySelector('.participant-name').textContent;
+  const participantImage = card.querySelector('.participant-image').src;
+  const participantQuote = card.querySelector('.participant-quote').textContent;
   
-  await new Promise(resolve => setTimeout(resolve, 500));
+  // Crear efecto de "extracción" de la card
+  card.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+  card.style.transform = 'scale(0.8) translateY(-50px)';
+  card.style.opacity = '0.7';
   
-  // Destruir la card con animación
-  card.style.transform = 'scale(0) rotate(360deg)';
-  card.style.opacity = '0';
+  await new Promise(resolve => setTimeout(resolve, 800));
+  
+  // Remover la card original de la lista
+  card.remove();
+  
+  // Crear modal de eliminación
+  await createEliminationModal(participantName, participantImage, participantQuote);
+}
+
+async function createEliminationModal(name, image, quote) {
+  // Crear modal
+  const modal = document.createElement('div');
+  modal.id = 'elimination-modal';
+  modal.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+  `;
+  
+  // Crear card del modal
+  const modalCard = document.createElement('div');
+  modalCard.className = 'modal-elimination-card';
+  modalCard.innerHTML = `
+    <div class="modal-card-content">
+      <div class="modal-participant-image-container">
+        <img src="${image}" alt="${name}" class="modal-participant-image">
+      </div>
+      <h2 class="modal-participant-name">${name}</h2>
+      <p class="modal-participant-quote">${quote}</p>
+      <div class="elimination-countdown">
+        <div class="countdown-text">ELIMINACIÓN EN</div>
+        <div class="countdown-number">3</div>
+      </div>
+    </div>
+  `;
+  
+  modal.appendChild(modalCard);
+  document.body.appendChild(modal);
+  
+  // Animación de entrada del modal
+  modal.style.opacity = '0';
+  modalCard.style.transform = 'scale(0.5) rotate(180deg)';
+  modalCard.style.opacity = '0';
+  
+  // Mostrar modal
+  await new Promise(resolve => setTimeout(resolve, 100));
+  modal.style.transition = 'opacity 0.5s ease';
+  modal.style.opacity = '1';
+  
+  modalCard.style.transition = 'all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+  modalCard.style.transform = 'scale(1) rotate(0deg)';
+  modalCard.style.opacity = '1';
   
   await new Promise(resolve => setTimeout(resolve, 1000));
   
-  // Remover del DOM
-  card.remove();
+  // Countdown dramático
+  await startEliminationCountdown();
+  
+  // Explosión del modal
+  await explodeModalCard(modalCard);
+  
+  // Remover modal
+  modal.remove();
   
   // Actualizar estadísticas
   gameState.eliminations++;
   document.getElementById('eliminations-count').textContent = gameState.eliminations;
   
-  // Mostrar notificación
-  showEliminationNotification();
+  // Mostrar notificación mejorada
+  showEnhancedEliminationNotification(name);
 }
 
-function showEliminationNotification() {
+async function startEliminationCountdown() {
+  const countdownNumber = document.querySelector('.countdown-number');
+  
+  for (let i = 3; i > 0; i--) {
+    countdownNumber.textContent = i;
+    countdownNumber.style.transform = 'scale(1.5)';
+    countdownNumber.style.color = i === 1 ? 'var(--color-primary)' : 'var(--color-text)';
+    
+    await new Promise(resolve => setTimeout(resolve, 200));
+    countdownNumber.style.transform = 'scale(1)';
+    await new Promise(resolve => setTimeout(resolve, 800));
+  }
+  
+  // Último momento dramático
+  countdownNumber.textContent = '¡ELIMINADO!';
+  countdownNumber.style.color = 'var(--color-primary)';
+  countdownNumber.style.transform = 'scale(2)';
+  
+  await new Promise(resolve => setTimeout(resolve, 500));
+}
+
+async function explodeModalCard(modalCard) {
+  // Crear partículas de explosión desde el modal
+  const rect = modalCard.getBoundingClientRect();
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+  
+  // Crear más partículas para el modal (20 partículas)
+  for (let i = 0; i < 20; i++) {
+    const particle = document.createElement('div');
+    particle.style.cssText = `
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      background: var(--color-primary);
+      border-radius: 50%;
+      left: ${centerX}px;
+      top: ${centerY}px;
+      z-index: 4000;
+      pointer-events: none;
+      box-shadow: 0 0 15px var(--color-primary);
+    `;
+    
+    document.body.appendChild(particle);
+    
+    // Dirección aleatoria para cada partícula
+    const angle = (360 / 20) * i + Math.random() * 18;
+    const distance = 150 + Math.random() * 200;
+    const endX = centerX + Math.cos(angle * Math.PI / 180) * distance;
+    const endY = centerY + Math.sin(angle * Math.PI / 180) * distance;
+    
+    // Animar partícula
+    particle.animate([
+      { 
+        transform: 'translate(0, 0) scale(1)',
+        opacity: 1
+      },
+      { 
+        transform: `translate(${endX - centerX}px, ${endY - centerY}px) scale(0)`,
+        opacity: 0
+      }
+    ], {
+      duration: 1500 + Math.random() * 1000,
+      easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+    }).onfinish = () => particle.remove();
+  }
+  
+  // Explosión de la card del modal
+  modalCard.style.transition = 'all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+  modalCard.style.transform = 'scale(3) rotate(1080deg)';
+  modalCard.style.opacity = '0';
+  modalCard.style.filter = 'blur(20px) brightness(5)';
+  
+  await new Promise(resolve => setTimeout(resolve, 1000));
+}
+
+
+function showEnhancedEliminationNotification(participantName) {
   const notification = document.createElement('div');
-  notification.className = 'elimination-notification';
+  notification.className = 'enhanced-elimination-notification';
   notification.innerHTML = `
     <div class="notification-content">
-      <div class="notification-icon">✕</div>
-      <div class="notification-text">ELIMINADO</div>
-      <div class="notification-subtitle">Reality en estado puro</div>
+      <div class="notification-icon">💥</div>
+      <div class="notification-title">¡${participantName.toUpperCase()} ELIMINADO!</div>
+      <div class="notification-subtitle">Jorge Ponce ha hablado</div>
+      <div class="notification-tagline">Reality sin filtros ✨</div>
+      <div class="notification-stats">
+        <div class="stat-item">
+          <span class="stat-number">${gameState.eliminations}</span>
+          <span class="stat-label">Eliminaciones</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">${gameState.connections}</span>
+          <span class="stat-label">Conexiones</span>
+        </div>
+      </div>
     </div>
   `;
   
@@ -372,23 +536,26 @@ function showEliminationNotification() {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
     color: var(--color-text);
-    padding: 3rem;
-    border-radius: 20px;
-    z-index: 2000;
+    padding: 4rem 3rem;
+    border-radius: 25px;
+    z-index: 5000;
     text-align: center;
-    box-shadow: var(--shadow-neon);
-    animation: eliminationNotificationShow 2s ease forwards;
+    box-shadow: var(--shadow-neon), 0 0 100px rgba(255, 0, 110, 0.5);
+    border: 2px solid var(--color-accent);
+    animation: enhancedNotificationShow 3s ease forwards;
+    max-width: 90vw;
+    width: 400px;
   `;
   
   document.body.appendChild(notification);
   
-  // Remover después de 3 segundos
+  // Remover después de 4 segundos
   setTimeout(() => {
-    notification.style.animation = 'eliminationNotificationHide 0.5s ease forwards';
-    setTimeout(() => notification.remove(), 500);
-  }, 3000);
+    notification.style.animation = 'enhancedNotificationHide 0.8s ease forwards';
+    setTimeout(() => notification.remove(), 800);
+  }, 4000);
 }
 
 function removeDarkOverlay() {
@@ -398,9 +565,19 @@ function removeDarkOverlay() {
     setTimeout(() => overlay.remove(), 500);
   }
   
-  // Limpiar highlights
+  // Limpiar todos los efectos
   document.querySelectorAll('.elimination-highlight').forEach(card => {
     card.classList.remove('elimination-highlight');
+  });
+  
+  document.querySelectorAll('.elimination-selected').forEach(card => {
+    card.classList.remove('elimination-selected');
+    // Restaurar estilos originales
+    card.style.transform = '';
+    card.style.zIndex = '';
+    card.style.boxShadow = '';
+    card.style.border = '';
+    card.style.transition = '';
   });
 }
 
