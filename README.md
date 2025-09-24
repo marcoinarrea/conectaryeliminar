@@ -2,37 +2,69 @@
 
 ## La masa madre de reality shows 🍞
 
-Bienvenido al repositorio oficial de **Conectar y Eliminar**, el gran reality show nacido en el programa **La Revuelta** de RTVE. Este proyecto surge para seguir la comedia y dar soporte digital a uno de los (tantos) experimentos televisivos de La Revuelta.
+Bienvenido al repositorio (no oficial) de **Conectar y Eliminar**, el reality de Jorge Ponce en **La Revuelta** de RTVE. Un experimento televisivo que ha redefinido el reality show a través de la simplicidad absoluta.
+
+> *"Reality en estado puro. Sin drama fabricado, sin guiones, sin estrategias. Por fin, televisión honesta."*
 
 ## 🎪 ¿Qué es esto?
 
-**Conectar y Eliminar** es una web interactiva que permite seguir en tiempo real las eliminaciones y el estado de los participantes del reality show. Con una estética retro inspirada en los concursos de televisión españoles de los 90-2000, la aplicación muestra:
+**Conectar y Eliminar** es una experiencia web interactiva completa que no solo permite seguir el reality show, sino **vivir la experiencia de ser Jorge Ponce**. Con una estética futurista-retro y efectos visuales cinematográficos, la aplicación incluye:
 
-- 🏆 **Primer Expulsado**: El participante que fue eliminado primero
-- 🎯 **Finalistas**: Los participantes que siguen en la casa (incluyendo eliminados posteriores)
-- 🎨 **Caricaturas personalizadas** de cada participante
-- 📱 **Diseño responsive** para seguir el drama desde cualquier dispositivo
+### 🎯 **Secciones principales:**
+- 🌟 **Esencia**: La filosofía del reality sin reality
+- 👥 **Participantes**: Primer expulsado y finalistas con sus caricaturas personalizadas
+- 📺 **Galas**: Timeline interactivo con videos integrados de YouTube
+- ⚡ **Momentos**: Los mejores clips en formato shorts
+- 🎮 **Simulador**: **¡CONECTA Y ELIMINA como Jorge Ponce!**
+
+### 🚀 **Funcionalidades avanzadas:**
+- 🎮 **Simulador interactivo** con efectos de eliminación cinematográficos
+- 📱 **Experiencia móvil optimizada** con ruleta de eliminación especial
+- 🎬 **Animaciones y efectos visuales** dignos de Hollywood
+- 🌐 **Compartir en redes sociales** integrado
+- ⚡ **Partículas flotantes** y efectos de iluminación dinámicos
 
 ## 🚀 Demo en vivo
 
-Puedes ver la aplicación funcionando en: [GitHub Pages](https://conectaryeliminar.com)
+Puedes ver la aplicación funcionando en: [https://conectaryeliminar.com](https://conectaryeliminar.com)
 
 ## 🛠️ Tecnologías utilizadas
 
-- **HTML5** con semántica completa y accesibilidad
-- **CSS3** con animaciones y efectos retro
-- **JavaScript** vanilla para la interactividad
-- **GitHub Pages** para el despliegue automático
-- **SEO optimizado** para máxima visibilidad
+- **HTML5** con semántica completa y Schema.org para SEO avanzado
+- **CSS3** con variables CSS, gradientes complejos y animaciones cinematográficas
+- **JavaScript ES6+** vanilla con async/await y APIs modernas
+- **JSON dinámico** para gestión de datos de participantes y galas
+- **GitHub Pages** para despliegue automático
+- **PWA-ready** con favicon SVG y meta tags completos
 
-## 🎨 Características
+## 🎨 Características técnicas destacadas
 
-- ✨ **Estética retro** con colores azules y efectos brillantes
-- 🎭 **Animaciones suaves** y efectos visuales
-- ♿ **Totalmente accesible** con ARIA labels y navegación por teclado
-- 📱 **100% responsive** - funciona en móvil, tablet y desktop
-- 🔍 **SEO optimizado** con meta tags completas
-- 🎪 **Efectos especiales** como partículas flotantes y luces parpadeantes
+### 🎮 **Simulador Jorge Ponce**
+- **Ruleta de eliminación** con efectos visuales espectaculares
+- **Detección automática** de dispositivo (móvil vs desktop)
+- **Experiencia diferenciada**: Ruleta modal en móvil, highlights en desktop
+- **Efectos de partículas** y explosiones al eliminar participantes
+- **Sistema de estadísticas** (conexiones y eliminaciones)
+
+### 🎬 **Efectos visuales avanzados**
+- **Partículas flotantes** con colores dinámicos y física realista
+- **Gradientes animados** en el fondo que cambian constantemente
+- **Efectos de iluminación neón** con CSS custom properties
+- **Animaciones de entrada** con Intersection Observer
+- **Parallax scrolling** en el hero section
+
+### 📱 **Experiencia móvil premium**
+- **Menú hamburguesa animado** con transiciones suaves
+- **Navegación por gestos** optimizada para touch
+- **Ruleta de eliminación especializada** para pantallas pequeñas
+- **Responsive design** con breakpoints específicos (480px, 768px, 1024px)
+
+### 🌐 **SEO y compartir**
+- **Open Graph** completo para Facebook/LinkedIn
+- **Twitter Cards** optimizadas
+- **JSON-LD structured data** para Google
+- **Modal de compartir** con múltiples plataformas
+- **Meta tags** dinámicos y robots.txt
 
 ## 🤝 Contribuciones
 
@@ -50,20 +82,31 @@ Este es un proyecto de la comunidad para la comunidad. Si quieres contribuir:
 
 ```
 conectaryeliminar/
-├── index.html          # Página principal
-├── style.css           # Estilos y animaciones
-├── script.js           # Lógica de la aplicación
-├── people.json         # Datos de los participantes
-├── img/                # Caricaturas de los participantes
+├── index.html          # Página principal con estructura semántica
+├── style.css           # 2000+ líneas de CSS con efectos avanzados
+├── script.js           # 900+ líneas de JavaScript con simulador completo
+├── data.json           # Base de datos JSON con participantes, galas y shorts
+├── favicon.svg         # Favicon vectorial optimizado
+├── robots.txt          # SEO y crawling
+├── sitemap.xml         # Mapa del sitio para buscadores
+├── package.json        # Dependencias y scripts de desarrollo
+├── img/                # Caricaturas de los 8 participantes
 │   ├── caricature_1.jpg
 │   ├── caricature_2.jpg
-│   └── ...
-└── .github/workflows/  # Despliegue automático
+│   ├── ...
+│   └── caricature_8.jpg
+└── README.md           # Este archivo
 ```
+
+### 🔍 **Archivos clave:**
+- **`data.json`**: Contiene toda la información dinámica (participantes, galas, shorts, filosofía)
+- **`script.js`**: Simulador completo con detección de dispositivo y efectos visuales
+- **`style.css`**: Sistema de diseño completo con variables CSS y animaciones
+- **`index.html`**: Estructura semántica con SEO avanzado y Schema.org
 
 ## 🎭 Sobre La Revuelta
 
-[La Revuelta](https://www.rtve.es/play/videos/la-revuelta/) es el programa de David Broncano en RTVE que ha revolucionado el late night español. **Conectar y Eliminar** nació como una broma que se convirtió en el reality show más seguido de la televisión española.
+[La Revuelta](https://www.rtve.es/play/videos/la-revuelta/) es el programa de David Broncano en RTVE que ha revolucionado el late night español. **Conectar y Eliminar** nació como una broma que parodia los realities de otras cadenas de televisión españolas.
 
 ## 📺 Lo mejor de Telecinco... ¡pero en RTVE!
 
@@ -73,11 +116,31 @@ Este proyecto captura la esencia de los grandes realities españoles con el humo
 
 Este proyecto está bajo la Licencia MIT - mira el archivo [LICENSE](LICENSE) para más detalles.
 
+## 🎮 Cómo usar el simulador
+
+1. **Navega hasta la sección "Simulador"**
+2. **Haz clic en "CONECTAR Y ELIMINAR"**
+3. **Disfruta de la experiencia:**
+   - 📱 **En móvil**: Ruleta dramática con efectos visuales
+   - 🖥️ **En desktop**: Highlights sobre participantes con scroll automático
+4. **Observa las estadísticas** de conexiones y eliminaciones
+5. **¡Elimina a todos y conviértete en el Jorge Ponce definitivo!**
+
+## ⚡ Características especiales del simulador
+
+- **Detección automática** de dispositivo para optimizar la experiencia
+- **Efectos de partículas** al eliminar participantes
+- **Animaciones cinematográficas** con explosiones y transiciones
+- **Sistema de estadísticas** que persiste durante la sesión
+- **Frases dinámicas** que cambian según el participante eliminado
+- **Notificaciones mejoradas** al estilo Jorge Ponce
+
 ## 🙏 Agradecimientos
 
-- 🎪 **David Broncano** y todo el equipo de La Revuelta por crear este universo
-- 📺 **RTVE** por apostar por la innovación televisiva
-- 🤡 **Los participantes** por darnos tanto entretenimiento
+- 🎪 **Jorge Ponce** por ser la mente maestra detrás de este experimento televisivo
+- 🎬 **David Broncano** y todo el equipo de La Revuelta por crear este universo
+- 📺 **RTVE** por apostar por la innovación televisiva y el humor inteligente
+- 🤡 **Los 8 participantes** por dar tanto
 
 ## ☕ ¿Te gusta el proyecto?
 
