@@ -79,7 +79,14 @@ Este proyecto está bajo la Licencia MIT - mira el archivo [LICENSE](LICENSE) pa
 - 📺 **RTVE** por apostar por la innovación televisiva
 - 🤡 **Los participantes** por darnos tanto entretenimiento
 
----
+## ☕ ¿Te gusta el proyecto?
+
+Si **Conectar y Eliminar** te ha hecho reír, te ha entretenido o simplemente quieres contribuir a cubrir algún gasto, puedes invitarme a un café ☕
+
+Como Jorge Ponce diría: *"Sin drama, sin complicaciones"*. Si quieres apoyar el proyecto:
+
+[![Buy Me A Coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=☕&slug=marcoinarrea&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff)](https://buymeacoffee.com/marcoinarrea)
+
 
 **¡Que empiece el espectáculo!** 🎪✨
 
