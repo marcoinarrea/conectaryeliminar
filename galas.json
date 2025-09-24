@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "title": "GALA 1",
+    "date": "17.09.2025",
+    "videoUrl": "https://www.youtube.com/embed/C3F_uYweX_I",
+    "description": "Primera gala, primera expulsión",
+    "available": true
+  },
+  {
+    "id": 2,
+    "title": "GALA 2",
+    "date": "23.09.2025",
+    "videoUrl": "",
+    "description": "No sabemos expulsar",
+    "available": false
+  },
+  {
+    "id": 3,
+    "title": "GALA 3",
+    "date": "30.09.2025",
+    "videoUrl": "",
+    "description": "-",
+    "available": false
+  },
+  {
+    "id": 4,
+    "title": "GALA 4",
+    "date": "07.10.2025",
+    "videoUrl": "",
+    "description": "-",
+    "available": false
+  }
+]

@@ -148,9 +148,57 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
+// Función para cargar galas desde JSON
+async function loadGalas() {
+  try {
+    const res = await fetch("galas.json");
+    const galas = await res.json();
+    renderGalas(galas);
+  } catch (error) {
+    console.error('Error loading galas:', error);
+  }
+}
+
+function renderGalas(galas) {
+  const container = document.getElementById('galas-grid');
+  container.innerHTML = "";
+  
+  galas.forEach(gala => {
+    const galaItem = document.createElement("div");
+    galaItem.className = `gala-item${!gala.available ? ' placeholder' : ''}`;
+    
+    const videoContent = gala.available && gala.videoUrl ? 
+      `<iframe 
+        src="${gala.videoUrl}" 
+        title="Conectar y Eliminar - ${gala.title}"
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        referrerpolicy="strict-origin-when-cross-origin" 
+        allowfullscreen
+        loading="lazy">
+      </iframe>` :
+      `<div class="coming-soon-content">
+        <span class="coming-soon-text">PRÓXIMAMENTE</span>
+        <div class="coming-soon-date">${gala.date}</div>
+      </div>`;
+    
+    galaItem.innerHTML = `
+      <h3 class="gala-number">${gala.title}</h3>
+      <div class="gala-date">${gala.date}</div>
+      <div class="gala-video-wrapper${!gala.available || !gala.videoUrl ? ' coming-soon' : ''}">
+        ${videoContent}
+      </div>
+      <p class="gala-description">${gala.description}</p>
+    `;
+    
+    container.appendChild(galaItem);
+  });
+}
+
 // Inicialización
 document.addEventListener("DOMContentLoaded", () => {
   loadFromStorage();
+  loadGalas();
   simulateRealTimeUpdates();
   addSpecialEffects();
 });

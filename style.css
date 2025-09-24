@@ -198,7 +198,8 @@ body {
 /* Secciones */
 .intro-section,
 .expelled-section,
-.finalists-section {
+.finalists-section,
+.galas-section {
   margin-bottom: 60px;
 }
 
@@ -244,6 +245,14 @@ body {
     inset 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
+.galas-title .title-text {
+  background: linear-gradient(135deg, #dc2626, #f59e0b);
+  border: 3px solid #6b7280;
+  box-shadow: 
+    0 0 20px rgba(245, 158, 11, 0.5),
+    inset 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
 /* Video Section */
 .video-container {
   max-width: 800px;
@@ -282,6 +291,189 @@ body {
   margin: 0;
   padding: 0 20px;
   line-height: 1.5;
+}
+
+/* Galas Gallery Section */
+.galas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.gala-item {
+  background: linear-gradient(145deg, #1e3a8a, #1e40af);
+  border: 3px solid #6b7280;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 5px 15px rgba(0, 0, 0, 0.5),
+    inset 0 0 10px rgba(107, 114, 128, 0.1);
+  overflow: hidden;
+}
+
+.gala-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.7),
+    0 0 30px rgba(245, 158, 11, 0.3);
+}
+
+.gala-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 48%, rgba(245, 158, 11, 0.1) 50%, transparent 52%);
+  animation: shine 4s infinite;
+}
+
+.gala-number {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.5rem;
+  color: #f59e0b;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+  margin: 0 0 5px 0;
+  letter-spacing: 2px;
+}
+
+.gala-date {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.9rem;
+  color: #9ca3af;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  margin-bottom: 15px;
+  font-weight: 300;
+}
+
+.gala-description {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.85rem;
+  color: #d1d5db;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  margin: 15px 0 0 0;
+  line-height: 1.4;
+  font-weight: 300;
+}
+
+.gala-video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
+}
+
+.gala-video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+/* Coming Soon Placeholders */
+.gala-video-wrapper.coming-soon {
+  background: 
+    linear-gradient(45deg, transparent 25%, rgba(30, 64, 175, 0.1) 25%, rgba(30, 64, 175, 0.1) 50%, transparent 50%, transparent 75%, rgba(30, 64, 175, 0.1) 75%),
+    linear-gradient(-45deg, transparent 25%, rgba(245, 158, 11, 0.05) 25%, rgba(245, 158, 11, 0.05) 50%, transparent 50%, transparent 75%, rgba(245, 158, 11, 0.05) 75%),
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(245, 158, 11, 0.1) 0%, transparent 50%),
+    linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
+  background-size: 20px 20px, 30px 30px, 100% 100%, 100% 100%, 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.gala-video-wrapper.coming-soon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  animation: scanline 3s infinite;
+}
+
+.gala-video-wrapper.coming-soon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.02) 2px,
+      rgba(255, 255, 255, 0.02) 4px
+    );
+  pointer-events: none;
+}
+
+@keyframes scanline {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.coming-soon-content {
+  text-align: center;
+  color: #e5e7eb;
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.coming-soon-text {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+  display: block;
+  margin-bottom: 8px;
+  text-shadow: 
+    0 0 10px rgba(245, 158, 11, 0.5),
+    2px 2px 5px rgba(0, 0, 0, 0.8);
+  color: #f59e0b;
+}
+
+.coming-soon-date {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.1rem;
+  color: #d1d5db;
+  font-weight: 300;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  letter-spacing: 1px;
+}
+
+.gala-item.placeholder {
+  opacity: 0.7;
+}
+
+.gala-item.placeholder:hover {
+  transform: none;
+  box-shadow: 
+    0 5px 15px rgba(0, 0, 0, 0.5),
+    inset 0 0 10px rgba(107, 114, 128, 0.1);
 }
 
 /* Grid de concursantes */
@@ -428,7 +620,8 @@ body {
   
   .intro-section,
   .expelled-section,
-  .finalists-section {
+  .finalists-section,
+  .galas-section {
     margin-bottom: 40px;
   }
   
@@ -440,6 +633,20 @@ body {
   .video-description {
     font-size: 1rem;
     padding: 0 15px;
+  }
+  
+  .galas-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 15px;
+  }
+  
+  .gala-item {
+    padding: 15px;
+  }
+  
+  .gala-number {
+    font-size: 1.3rem;
   }
 }
 
@@ -471,5 +678,17 @@ body {
   .github-link svg {
     width: 20px;
     height: 20px;
+  }
+  
+  .galas-grid {
+    padding: 0 10px;
+  }
+  
+  .gala-item {
+    padding: 12px;
+  }
+  
+  .gala-number {
+    font-size: 1.2rem;
   }
 }
