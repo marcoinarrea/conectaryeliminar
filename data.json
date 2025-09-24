@@ -1,0 +1,239 @@
+{
+  "meta": {
+    "title": "Conectar y Eliminar",
+    "subtitle": "La Masa Madre de Reality Shows",
+    "description": "Reality en estado puro. Sin drama fabricado, sin guiones, sin estrategias. Jorge se conecta, señala con el dedo y ya está.",
+    "author": "La Revuelta - RTVE",
+    "version": "2.0",
+    "lastUpdate": "2025-01-23"
+  },
+  
+  "philosophy": {
+    "essence": "Reality sin reality",
+    "concept": "Por fin, televisión honesta",
+    "creator": "Jorge Ponce",
+    "origin": "La Revuelta - RTVE",
+    "tagline": "Por fin, un reality sin reality"
+  },
+  
+  "participants": [
+    {
+      "id": 1,
+      "name": "Random1",
+      "image": "img/caricature_5.jpg",
+      "status": "expelled",
+      "eliminationDate": "17.09.2025",
+      "eliminationOrder": 1,
+      "signature": "La primera víctima",
+      "connectionTime": "00:00:45",
+      "lastWords": "¿En serio? ¿Ya?"
+    },
+    {
+      "id": 2,
+      "name": "Random2", 
+      "image": "img/caricature_4.jpg",
+      "status": "finalist-eliminated",
+      "eliminationDate": "23.09.2025",
+      "eliminationOrder": 2,
+      "signature": "Plot twist inesperado",
+      "connectionTime": "00:01:23",
+      "lastWords": "Esto es muy random",
+      "eliminado": true
+    },
+    {
+      "id": 3,
+      "name": "Random3",
+      "image": "img/caricature_1.jpg", 
+      "status": "finalist",
+      "connectionTime": "00:02:15",
+      "signature": "Modo ninja activado",
+      "favoritePhrase": "Aquí observando el drama",
+      "eliminado": false
+    },
+    {
+      "id": 4,
+      "name": "Random4",
+      "image": "img/caricature_2.jpg",
+      "status": "finalist", 
+      "connectionTime": "00:01:58",
+      "signature": "La mente maestra",
+      "favoritePhrase": "Todo está calculado",
+      "eliminado": false
+    },
+    {
+      "id": 5,
+      "name": "Random5",
+      "image": "img/caricature_3.jpg",
+      "status": "finalist",
+      "connectionTime": "00:00:32", 
+      "signature": "Speed run mode",
+      "favoritePhrase": "Sin tiempo que perder",
+      "eliminado": false
+    },
+    {
+      "id": 6,
+      "name": "Random6",
+      "image": "img/caricature_6.jpg",
+      "status": "finalist",
+      "connectionTime": "00:03:41",
+      "signature": "Filosofía zen", 
+      "favoritePhrase": "La paciencia es clave",
+      "eliminado": false
+    },
+    {
+      "id": 7,
+      "name": "Random7",
+      "image": "img/caricature_7.jpg",
+      "status": "finalist",
+      "connectionTime": "00:01:12",
+      "signature": "En el punto medio",
+      "favoritePhrase": "Ni muy fast ni muy slow",
+      "eliminado": false
+    },
+    {
+      "id": 8,
+      "name": "Random8",
+      "image": "img/caricature_8.jpg",
+      "status": "finalist",
+      "connectionTime": "00:02:03",
+      "signature": "Aura misteriosa",
+      "favoritePhrase": "Todo es relativo, bro",
+      "eliminado": false
+    }
+  ],
+
+  "galas": [
+    {
+      "id": 1,
+      "title": "GALA 1",
+      "date": "17.09.2025",
+      "videoUrl": "https://www.youtube.com/embed/C3F_uYweX_I",
+      "description": "Jorge se conecta, Random1 se va.",
+      "available": true,
+      "eliminated": "Random1",
+      "duration": "45:32",
+      "viewCount": "1.2M",
+      "highlights": [
+        "Reality en estado puro",
+        "Eliminación sin artificios",
+        "Jorge revoluciona la tele"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "GALA 2",
+      "date": "23.09.2025", 
+      "videoUrl": "",
+      "description": "Eliminación doble. Random1 se resiste.",
+      "available": false,
+      "eliminated": "Random2",
+      "duration": "TBD",
+      "expectedViewCount": "1.5M",
+      "anticipation": [
+        "¿Quién será el elegido?",
+        "Reality sin complicaciones", 
+        "La simplicidad triunfa"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "GALA 3",
+      "date": "30.09.2025",
+      "videoUrl": "",
+      "description": "",
+      "available": false,
+      "duration": "TBD",
+      "expectedViewCount": "2M",
+      "philosophy": "La perfección está en la simplicidad"
+    }
+  ],
+
+  "shorts": [
+    {
+      "id": 1,
+      "title": "🔥 REALITY SIN FILTROS",
+      "description": "El momento que cambió la televisión. Jorge conecta, elimina, punto.",
+      "videoId": "3x4cS6kA3yc",
+      "galaRef": "Gala 1",
+      "tags": ["puro", "crudo", "honesto"],
+      "duration": "60s",
+      "viralScore": 9.2,
+      "essence": "Reality en estado puro"
+    },
+    {
+      "id": 2,
+      "title": "😱 SIN ARTIFICIOS", 
+      "description": "Random2 eliminado sin dramas ni llantos. Así se hace televisión.",
+      "videoId": "yzFXmktu31c",
+      "galaRef": "Gala 2",
+      "tags": ["directo", "sin-drama", "eficaz"],
+      "duration": "45s", 
+      "viralScore": 8.9,
+      "essence": "Eliminación limpia, sin complicaciones"
+    }
+  ],
+
+  "game": {
+    "title": "SIMULADOR JORGE PONCE",
+    "description": "¿Te atreves a ser Jorge? Conecta y elimina como un pro.",
+    "mechanics": {
+      "connection": "Dale al botón para conectarte",
+      "decision": "Mira a la peña en directo", 
+      "elimination": "Elige a quién echar",
+      "consequence": "Vive el drama"
+    },
+    "philosophy": "Ser random es un arte",
+    "levels": [
+      {
+        "name": "Novato Eliminador",
+        "description": "Tus primeras eliminaciones random"
+      },
+      {
+        "name": "Pro de las Conexiones", 
+        "description": "Ya tienes el truco pillado"
+      },
+      {
+        "name": "Jorge Ponce Mode",
+        "description": "Eres puro arte eliminando gente"
+      }
+    ]
+  },
+
+  "viral": {
+    "shareTexts": [
+      "🎭 Por fin, un reality sin reality - Jorge Ponce lo ha conseguido",
+      "🔥 Reality en estado puro: sin drama, sin guión, solo conexión",
+      "😱 Televisión honesta por primera vez en la historia",
+      "🎪 RTVE acaba de inventar el anti-reality y es genial"
+    ],
+    "hashtags": ["#ConectarYEliminar", "#JorgePonce", "#LaRevuelta", "#RTVE", "#RealityPuro"],
+    "memes": [
+      "Otros reality shows: drama + lágrimas + estrategias | Jorge Ponce: conectar, eliminar",
+      "Plot twist: el verdadero reality éramos los amigos que eliminamos por el camino",
+      "Jorge: 'Vamos a hacer algo simple' | También Jorge: *revoluciona la televisión*"
+    ]
+  },
+
+  "aesthetics": {
+    "colors": {
+      "primary": "#ff006e",
+      "secondary": "#8338ec", 
+      "accent": "#3a86ff",
+      "success": "#06ffa5",
+      "warning": "#ffbe0b",
+      "background": "#0d1117",
+      "text": "#f0f6fc",
+      "muted": "#8b949e"
+    },
+    "fonts": {
+      "display": "Inter",
+      "heading": "Inter", 
+      "body": "Inter"
+    },
+    "effects": {
+      "glow": "0 0 30px rgba(255, 0, 110, 0.6)",
+      "shadow": "0 0 50px rgba(255, 0, 110, 0.3)",
+      "blur": "backdrop-filter: blur(15px)"
+    }
+  }
+}
