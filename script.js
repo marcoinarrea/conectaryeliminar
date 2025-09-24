@@ -159,14 +159,15 @@ function createGalaElement(gala) {
   
   const videoContent = gala.available && gala.videoUrl
     ? `<iframe src="${gala.videoUrl}" title="${gala.title}" class="gala-video" frameborder="0" allowfullscreen loading="lazy"></iframe>`
-    : `<div class="gala-coming-soon"><p>Próximamente: ${gala.date}</p></div>`;
+    : `<div class="gala-coming-soon">Próximamente: ${gala.date}</div>`;
+  
+  const description = gala.description ? `<p class="gala-description">${gala.description}</p>` : '';
   
   galaItem.innerHTML = `
-    <div class="gala-marker"></div>
     <div class="gala-content">
       <div class="gala-date">${gala.date}</div>
       <h3 class="gala-title">${gala.title}</h3>
-      <p class="gala-description">${gala.description}</p>
+      ${description}
       ${videoContent}
     </div>
   `;
