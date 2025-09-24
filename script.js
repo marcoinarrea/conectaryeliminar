@@ -222,27 +222,186 @@ function initSimulator() {
   simulator.innerHTML = `
     <div class="game-interface">
       <div class="game-header">
-        <h3>Simulador de Conexión</h3>
+        <h3>Simulador Jorge Ponce</h3>
         <div class="game-stats">
           <div class="stat">Conexiones: <span id="connections-count">0</span></div>
           <div class="stat">Eliminaciones: <span id="eliminations-count">0</span></div>
         </div>
       </div>
       <div class="game-area">
-        <button class="connect-btn" id="connect-btn" onclick="initiateConnection()">
-          CONECTAR AL SALÓN
+        <button class="connect-btn" id="connect-btn" onclick="startEliminationProcess()">
+          CONECTAR Y ELIMINAR
         </button>
-        <div class="connection-status" id="connection-status">Desconectado</div>
+        <div class="connection-status" id="connection-status">Listo para conectar al salón virtual</div>
       </div>
     </div>
   `;
 }
 
-function initiateConnection() {
+async function startEliminationProcess() {
+  // Incrementar estadísticas
   gameState.connections++;
   document.getElementById('connections-count').textContent = gameState.connections;
-  document.getElementById('connection-status').textContent = 'Conectado - Experiencia completada';
-  showNotification('¡Has experimentado la esencia del reality!');
+  
+  // Deshabilitar botón
+  const connectBtn = document.getElementById('connect-btn');
+  connectBtn.disabled = true;
+  connectBtn.textContent = 'CONECTANDO...';
+  
+  // Actualizar status
+  document.getElementById('connection-status').textContent = 'Conectando al salón virtual...';
+  
+  // Navegar a participantes
+  scrollToSection('participants');
+  
+  // Esperar a que termine el scroll
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  
+  // Crear overlay oscuro
+  createDarkOverlay();
+  
+  // Iniciar proceso de eliminación
+  await eliminationRoulette();
+  
+  // Restaurar botón
+  connectBtn.disabled = false;
+  connectBtn.textContent = 'CONECTAR Y ELIMINAR';
+  document.getElementById('connection-status').textContent = 'Listo para otra conexión';
+}
+
+function createDarkOverlay() {
+  const overlay = document.createElement('div');
+  overlay.id = 'elimination-overlay';
+  overlay.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    transition: all 0.5s ease;
+  `;
+  document.body.appendChild(overlay);
+}
+
+async function eliminationRoulette() {
+  // Obtener participantes activos (no eliminados)
+  const activeParticipants = appData.participants.filter(p => 
+    p.status !== 'expelled' && p.status !== 'finalist-eliminated' && !p.eliminado
+  );
+  
+  if (activeParticipants.length === 0) {
+    showNotification('¡No quedan participantes para eliminar!');
+    removeDarkOverlay();
+    return;
+  }
+  
+  // Obtener las cards de participantes activos
+  const participantCards = document.querySelectorAll('.participant-card:not(.eliminated)');
+  
+  // Proceso de ruleta
+  const rounds = 15; // Número de vueltas
+  const finalDelay = 200; // Delay final más lento
+  
+  for (let i = 0; i < rounds; i++) {
+    // Quitar highlight anterior
+    participantCards.forEach(card => card.classList.remove('elimination-highlight'));
+    
+    // Highlight aleatorio
+    const randomCard = participantCards[Math.floor(Math.random() * participantCards.length)];
+    randomCard.classList.add('elimination-highlight');
+    
+    // Delay progresivo (más lento hacia el final)
+    const delay = i < rounds - 5 ? 100 : 150 + (i - (rounds - 5)) * 50;
+    await new Promise(resolve => setTimeout(resolve, delay));
+  }
+  
+  // Selección final
+  await new Promise(resolve => setTimeout(resolve, 500));
+  
+  // Eliminar el participante seleccionado
+  const selectedCard = document.querySelector('.elimination-highlight');
+  if (selectedCard) {
+    await eliminateParticipant(selectedCard);
+  }
+  
+  // Remover overlay
+  removeDarkOverlay();
+}
+
+async function eliminateParticipant(card) {
+  // Efecto dramático
+  card.style.transition = 'all 1s ease';
+  card.style.transform = 'scale(1.1)';
+  card.style.boxShadow = '0 0 50px var(--color-primary)';
+  
+  await new Promise(resolve => setTimeout(resolve, 500));
+  
+  // Destruir la card con animación
+  card.style.transform = 'scale(0) rotate(360deg)';
+  card.style.opacity = '0';
+  
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  
+  // Remover del DOM
+  card.remove();
+  
+  // Actualizar estadísticas
+  gameState.eliminations++;
+  document.getElementById('eliminations-count').textContent = gameState.eliminations;
+  
+  // Mostrar notificación
+  showEliminationNotification();
+}
+
+function showEliminationNotification() {
+  const notification = document.createElement('div');
+  notification.className = 'elimination-notification';
+  notification.innerHTML = `
+    <div class="notification-content">
+      <div class="notification-icon">✕</div>
+      <div class="notification-text">ELIMINADO</div>
+      <div class="notification-subtitle">Reality en estado puro</div>
+    </div>
+  `;
+  
+  notification.style.cssText = `
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    color: var(--color-text);
+    padding: 3rem;
+    border-radius: 20px;
+    z-index: 2000;
+    text-align: center;
+    box-shadow: var(--shadow-neon);
+    animation: eliminationNotificationShow 2s ease forwards;
+  `;
+  
+  document.body.appendChild(notification);
+  
+  // Remover después de 3 segundos
+  setTimeout(() => {
+    notification.style.animation = 'eliminationNotificationHide 0.5s ease forwards';
+    setTimeout(() => notification.remove(), 500);
+  }, 3000);
+}
+
+function removeDarkOverlay() {
+  const overlay = document.getElementById('elimination-overlay');
+  if (overlay) {
+    overlay.style.opacity = '0';
+    setTimeout(() => overlay.remove(), 500);
+  }
+  
+  // Limpiar highlights
+  document.querySelectorAll('.elimination-highlight').forEach(card => {
+    card.classList.remove('elimination-highlight');
+  });
 }
 
 // FUNCIONES VIRALES
@@ -345,4 +504,4 @@ window.shareToTwitter = shareToTwitter;
 window.shareToFacebook = shareToFacebook;
 window.copyLink = copyLink;
 window.closeShareModal = closeShareModal;
-window.initiateConnection = initiateConnection;
+window.startEliminationProcess = startEliminationProcess;
