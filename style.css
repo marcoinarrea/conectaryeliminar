@@ -199,7 +199,8 @@ body {
 .intro-section,
 .expelled-section,
 .finalists-section,
-.galas-section {
+.galas-section,
+.shorts-section {
   margin-bottom: 60px;
 }
 
@@ -250,6 +251,14 @@ body {
   border: 3px solid #6b7280;
   box-shadow: 
     0 0 20px rgba(245, 158, 11, 0.5),
+    inset 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.shorts-title .title-text {
+  background: linear-gradient(135deg, #ec4899, #f97316);
+  border: 3px solid #6b7280;
+  box-shadow: 
+    0 0 20px rgba(249, 115, 22, 0.5),
     inset 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
@@ -476,6 +485,155 @@ body {
     inset 0 0 10px rgba(107, 114, 128, 0.1);
 }
 
+/* YouTube Shorts Section */
+.shorts-subtitle {
+  text-align: center;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.1rem;
+  color: #d1d5db;
+  margin-bottom: 40px;
+  padding: 0 20px;
+  line-height: 1.6;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.shorts-subtitle strong {
+  color: #f97316;
+  font-weight: 600;
+}
+
+.shorts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.short-item {
+  background: linear-gradient(145deg, #1e3a8a, #1e40af);
+  border: 3px solid #6b7280;
+  border-radius: 15px;
+  padding: 15px;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 5px 15px rgba(0, 0, 0, 0.5),
+    inset 0 0 10px rgba(107, 114, 128, 0.1);
+  overflow: hidden;
+}
+
+.short-item:hover {
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.7),
+    0 0 30px rgba(249, 115, 22, 0.3);
+}
+
+.short-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 48%, rgba(249, 115, 22, 0.1) 50%, transparent 52%);
+  animation: shine 5s infinite;
+}
+
+.short-video-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 177.78%; /* 9:16 aspect ratio for shorts */
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  background: #000;
+}
+
+.short-video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+.short-overlay {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+.short-duration {
+  background: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+}
+
+.short-gala-ref {
+  background: rgba(249, 115, 22, 0.9);
+  color: #ffffff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+}
+
+.short-content {
+  position: relative;
+  z-index: 2;
+}
+
+.short-title {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.3rem;
+  color: #f97316;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+  margin: 0 0 8px 0;
+  letter-spacing: 1px;
+  line-height: 1.2;
+}
+
+.short-description {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.9rem;
+  color: #d1d5db;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+  font-weight: 300;
+}
+
+.short-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.short-tag {
+  background: rgba(249, 115, 22, 0.2);
+  color: #fbbf24;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+  border: 1px solid rgba(249, 115, 22, 0.3);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
 /* Grid de concursantes */
 .contestants-grid {
   display: grid;
@@ -621,7 +779,8 @@ body {
   .intro-section,
   .expelled-section,
   .finalists-section,
-  .galas-section {
+  .galas-section,
+  .shorts-section {
     margin-bottom: 40px;
   }
   
@@ -647,6 +806,17 @@ body {
   
   .gala-number {
     font-size: 1.3rem;
+  }
+  
+  .shorts-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 15px;
+  }
+  
+  .shorts-subtitle {
+    font-size: 1rem;
+    padding: 0 15px;
   }
 }
 
@@ -689,6 +859,23 @@ body {
   }
   
   .gala-number {
+    font-size: 1.2rem;
+  }
+  
+  .shorts-grid {
+    padding: 0 10px;
+  }
+  
+  .shorts-subtitle {
+    font-size: 0.95rem;
+    padding: 0 10px;
+  }
+  
+  .short-item {
+    padding: 12px;
+  }
+  
+  .short-title {
     font-size: 1.2rem;
   }
 }

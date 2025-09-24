@@ -195,10 +195,68 @@ function renderGalas(galas) {
   });
 }
 
+// Función para cargar shorts desde JSON
+async function loadShorts() {
+  try {
+    const res = await fetch("shorts.json");
+    const shorts = await res.json();
+    renderShorts(shorts);
+  } catch (error) {
+    console.error('Error loading shorts:', error);
+  }
+}
+
+function renderShorts(shorts) {
+  const container = document.getElementById('shorts-grid');
+  container.innerHTML = "";
+  
+  shorts.forEach(short => {
+    const shortItem = document.createElement("div");
+    shortItem.className = "short-item";
+    
+    const tagsHtml = short.tags.map(tag => `<span class="short-tag">#${tag}</span>`).join('');
+    
+    shortItem.innerHTML = `
+      <div class="short-video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/${short.videoId}" 
+          title="${short.title}"
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          referrerpolicy="strict-origin-when-cross-origin" 
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+        <div class="short-overlay">
+          <div class="short-duration">${short.duration}</div>
+          <div class="short-gala-ref">${short.galaRef}</div>
+        </div>
+      </div>
+      <div class="short-content">
+        <h3 class="short-title">${short.title}</h3>
+        <p class="short-description">${short.description}</p>
+        <div class="short-tags">${tagsHtml}</div>
+      </div>
+    `;
+    
+    // Efecto hover para shorts
+    shortItem.addEventListener('mouseenter', () => {
+      shortItem.style.transform = 'translateY(-8px) scale(1.02)';
+    });
+    
+    shortItem.addEventListener('mouseleave', () => {
+      shortItem.style.transform = '';
+    });
+    
+    container.appendChild(shortItem);
+  });
+}
+
 // Inicialización
 document.addEventListener("DOMContentLoaded", () => {
   loadFromStorage();
   loadGalas();
+  loadShorts();
   simulateRealTimeUpdates();
   addSpecialEffects();
 });

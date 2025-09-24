@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "🔥 LA BOMBA DE LA GALA 1",
+    "description": "El momento que nadie vio venir",
+    "videoId": "3x4cS6kA3yc",
+    "galaRef": "Gala 1",
+    "tags": ["épico", "impactante", "viral"],
+    "duration": "60s"
+  },
+  {
+    "id": 2,
+    "title": "😱 DRAMA MÁXIMO GALA 2",
+    "description": "Cuando las cosas se pusieron serias",
+    "videoId": "yzFXmktu31c", 
+    "galaRef": "Gala 2",
+    "tags": ["drama", "tensión", "WTF"],
+    "duration": "45s"
+  }
+]
