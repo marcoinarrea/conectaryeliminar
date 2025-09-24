@@ -756,21 +756,28 @@ body {
   opacity: 0.7;
 }
 
+.participant-image-container {
+  position: relative;
+  display: inline-block;
+}
+
 .participant-card.eliminated .participant-image {
   filter: grayscale(100%) brightness(0.6);
 }
 
-.participant-card.eliminated::after {
+.participant-card.eliminated .participant-image-container::after {
   content: '✕';
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 3rem;
+  font-size: clamp(2.5rem, 8vw, 4rem);
   color: var(--color-accent);
   z-index: 2;
-  text-shadow: 0 0 20px rgba(205, 133, 63, 0.8);
+  text-shadow: 0 0 20px rgba(139, 92, 246, 0.8);
   animation: elimination-pulse 2s ease-in-out infinite;
+  pointer-events: none;
+  font-weight: bold;
 }
 
 @keyframes elimination-pulse {

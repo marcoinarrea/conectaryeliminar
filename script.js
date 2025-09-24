@@ -47,7 +47,6 @@ function initNavigation() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const sectionId = entry.target.id || 'essence';
-        console.log('Sección visible:', sectionId); // Debug
         updateActiveNavItem(sectionId);
       }
     });
@@ -131,17 +130,20 @@ function initParticipants() {
 
 function createParticipantCard(participant, isEliminated) {
   const card = document.createElement('div');
-  card.className = `participant-card ${isEliminated ? 'eliminated' : ''}`;
+  const actuallyEliminated = isEliminated || participant.status === 'finalist-eliminated' || participant.eliminado;
+  card.className = `participant-card ${actuallyEliminated ? 'eliminated' : ''}`;
   
-  const statusText = isEliminated 
-    ? `Eliminado - ${participant.eliminationDate}`
+  const statusText = actuallyEliminated 
+    ? `Eliminade - ${participant.eliminationDate}`
     : participant.signature || 'Superviviente';
   
   card.innerHTML = `
-    <img src="${participant.image}" alt="${participant.name}" class="participant-image" loading="lazy">
+    <div class="participant-image-container">
+      <img src="${participant.image}" alt="${participant.name}" class="participant-image" loading="lazy">
+    </div>
     <h4 class="participant-name">${participant.name}</h4>
     <p class="participant-status">${statusText}</p>
-    <div class="participant-quote">"${isEliminated ? participant.lastWords : participant.favoritePhrase}"</div>
+    <div class="participant-quote">"${actuallyEliminated ? participant.lastWords : participant.favoritePhrase}"</div>
   `;
   
   return card;
