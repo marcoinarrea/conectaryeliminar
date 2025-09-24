@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://conectaryeliminar.com/sitemap.xml
+
+# Crawl-delay (optional)
+Crawl-delay: 1
+
+# Allow indexing of all content
+Allow: /img/
+Allow: /style.css
+Allow: /script.js
+Allow: /people.json
+Allow: /galas.json
+
+# Disallow nothing - we want everything indexed
+# Disallow:
+
+# Additional information
+# Site: Conectar y Eliminar - Reality Show de La Revuelta
+# Contact: https://github.com/marcoinarrea/conectaryeliminar
