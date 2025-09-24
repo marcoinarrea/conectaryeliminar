@@ -2,7 +2,7 @@
 
 ## La masa madre de reality shows 🍞
 
-Bienvenido al repositorio oficial de **Conectar y Eliminar**, el gran reality show nacido en el programa **La Revuelta** de RTVE. Este proyecto surge para seguir la comedia y dar soporte digital a uno de los experimentos televisivos más divertidos de la televisión española.
+Bienvenido al repositorio oficial de **Conectar y Eliminar**, el gran reality show nacido en el programa **La Revuelta** de RTVE. Este proyecto surge para seguir la comedia y dar soporte digital a uno de los (tantos) experimentos televisivos de La Revuelta.
 
 ## 🎪 ¿Qué es esto?
 
@@ -15,7 +15,7 @@ Bienvenido al repositorio oficial de **Conectar y Eliminar**, el gran reality sh
 
 ## 🚀 Demo en vivo
 
-Puedes ver la aplicación funcionando en: [GitHub Pages](https://marcoinarrea.github.io/conectaryeliminar/)
+Puedes ver la aplicación funcionando en: [GitHub Pages](https://conectaryeliminar.com)
 
 ## 🛠️ Tecnologías utilizadas
 
@@ -45,17 +45,6 @@ Este es un proyecto de la comunidad para la comunidad. Si quieres contribuir:
 3. **Commit** tus cambios (`git commit -m 'Añadir nueva funcionalidad'`)
 4. **Push** a la rama (`git push origin feature/nueva-funcionalidad`)
 5. Abre un **Pull Request**
-
-### 💡 Ideas para contribuir
-
-- 🎨 Mejoras visuales y animaciones
-- 📊 Estadísticas de participantes
-- 🔊 Efectos de sonido
-- 📱 Mejoras en la experiencia móvil
-- 🌐 Internacionalización
-- 🎭 Nuevas caricaturas o avatares
-- 📈 Analytics y métricas
-- 🎪 Easter eggs y funcionalidades ocultas
 
 ## 📁 Estructura del proyecto
 
@@ -88,7 +77,6 @@ Este proyecto está bajo la Licencia MIT - mira el archivo [LICENSE](LICENSE) pa
 
 - 🎪 **David Broncano** y todo el equipo de La Revuelta por crear este universo
 - 📺 **RTVE** por apostar por la innovación televisiva
-- 🎨 **La comunidad** por hacer este proyecto posible
 - 🤡 **Los participantes** por darnos tanto entretenimiento
 
 ---
